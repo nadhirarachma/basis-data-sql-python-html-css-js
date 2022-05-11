@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+{% block content %}
+  
+<h1>Login Berhasil!</h1>
+    {% for res in result %}
+        <p>Email: {{ res.email }}</p>
+        <p>Password: {{ res.password }}</p>
+    {% endfor %}
+    <p>Role: {{ request.session.role }}</p>
+
+    <p><a href="{% url 'main:logout' %}">Log Out</a></p>
+
+{% endblock content %}
+
