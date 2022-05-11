@@ -4,8 +4,8 @@ from django.db import connection
 from collections import namedtuple
 from .forms import *
 
-def home(request):
-    return render(request, 'main/home.html')
+# def home(request):
+#     return render(request, 'main/home.html')
 
 def tupleFetch(cursor):
     desc = cursor.description
@@ -106,7 +106,7 @@ def loggedInView(request):
             cursor.close()
 
         return render(request, 'loginBerhasil.html', {"result" : result})
-        
+
    else:
         return HttpResponseRedirect('/login')
 
