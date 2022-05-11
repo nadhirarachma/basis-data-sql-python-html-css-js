@@ -106,6 +106,14 @@ DATABASES = {
 DATABASES['default'] = dj_database_url.config()
 DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
 
+import sys
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase'
+    }
+
+
 # Set database settings automatically using DATABASE_URL.
 if PRODUCTION:
     DATABASES['default'] = dj_database_url.config(
