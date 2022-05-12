@@ -29,7 +29,6 @@ def index(request):
 
 def login(request):
     result = []
-
     FormLogin = LoginForm(request.POST)
 
     if (FormLogin.is_valid() and request.method == 'POST'):
