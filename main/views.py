@@ -60,7 +60,7 @@ def login(request):
                 
                 if(cek_pengguna != None):
                     role = "pengguna"
-                    cursor.execute("SELECT Email, Password FROM PENGGUNA WHERE Email ='" + email + "' AND Password = '" + password + "'")
+                    cursor.execute("SELECT * FROM PENGGUNA WHERE Email ='" + email + "' AND Password = '" + password + "'")
                     # result = cursor.fetchone()
 
                 if (cursor.fetchone()):
@@ -78,7 +78,7 @@ def login(request):
         finally:
             cursor.close()
 
-        return HttpResponseRedirect('/viewMessage')
+        return HttpResponseRedirect('/profile')
 
     else:
         FormLogin = LoginForm()
@@ -94,10 +94,12 @@ def loggedInView(request):
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM ADMIN WHERE EMAIL = '"+ request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
-            
+                role = "admin"
+
             else:
                 cursor.execute("SELECT * FROM PENGGUNA WHERE EMAIL = '"+ request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
+                role = "pengguna"
 
         except Exception as e:
             print(e)
@@ -105,7 +107,7 @@ def loggedInView(request):
         finally:
             cursor.close()
 
-        return render(request, 'loginBerhasil.html', {"result" : result})
+        return render(request, 'loginBerhasil.html', {"result" : result, "role" : role})
 
    else:
         return HttpResponseRedirect('/login')

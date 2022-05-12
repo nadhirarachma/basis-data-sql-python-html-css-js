@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <body>
+        {% if role == 'admin' %}
+            <div class="navbar">
+                <a href="/profile">Home</a>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Lumbung
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Lihat Isi Lumbung</a>
+                        <a href="#">Lihat Transaksi Updgrade Lumbung</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Koin
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Buat Paket Koin</a>
+                        <a href="#">List Paket Koin</a>
+                        <a href="#">List Transaksi Pembelian Koin</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Aset
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Buat Aset</a>
+                        <a href="#">List Aset</a>
+                        <a href="#">Buat Hewan Menghasilkan Produk Hewan</a>
+                        <a href="#">List Hewan Menghasilkan Produk Hewan</a>
+                        <a href="#">Buat Bibit Menghasilkan Panen</a>
+                        <a href="#">List Bibit Menghasilkan Panen</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Koleksi Aset
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">List Koleksi Aset</a>
+                        <a href="#">List Transaksi Pembelian Aset</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Produk
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Buat Produk</a>
+                        <a href="#">List Produk</a>
+                        <a href="#">Buat Produksi</a>
+                        <a href="#">List Produksi</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Histori Produk
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">List Histori Produksi Hewan</a>
+                        <a href="#">List Histori Produksi Tanaman</a>
+                        <a href="#">List Histori Produksi Makanan</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Pesanan
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Buat Pesanan</a>
+                        <a href="#">List Pesanan</a>
+                        <a href="#">List Histori Penjualan</a>
+                    </div>
+                </div>
+
+                <a href="{% url 'main:logout' %}">Log Out</a>
+
+            </div> 
+        {% endif %}
+
+        {% if role == 'pengguna' %}
+            <div class="navbar">
+                <a href="/profile">Home</a>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Lumbung
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Lihat Isi Lumbung</a>
+                        <a href="#">Upgrade Lumbung</a>
+                        <a href="#">Lihat Transaksi Updgrade Lumbung</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Koin
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">List Paket Koin</a>
+                        <a href="#">List Transaksi Pembelian Koin</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Aset
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">List Aset</a>
+                        <a href="#">List Hewan Menghasilkan Produk Hewan</a>
+                        <a href="#">List Bibit Menghasilkan Panen</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Koleksi Aset
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">List Koleksi Aset</a>
+                        <a href="#">Buat Transaksi Pembelian Aset</a>
+                        <a href="#">List Transaksi Pembelian Aset</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Produk
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">List Produk</a>
+                        <a href="#">List Produksi</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Proses Produksi
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Produksi Hewan</a>
+                        <a href="#">List Histori Produksi Hewan</a>
+                        <a href="#">Produksi Tanaman</a>
+                        <a href="#">List Histori Produksi Tanaman</a>
+                        <a href="#">Produksi Makanan</a>
+                        <a href="#">List Histori Produksi Makanan</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Pesanan
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">List Pesanan</a>
+                        <a href="#">List Histori Penjualan</a>
+                    </div>
+                </div>
+
+                <a href="{% url 'main:logout' %}">Log Out</a>
+
+            </div> 
+        {% endif %}
+        
+    </body>
+
+</html>
