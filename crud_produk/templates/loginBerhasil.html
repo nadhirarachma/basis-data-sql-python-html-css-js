@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+{% block meta %}
+<title>TK3-F04</title>
+{% endblock meta %}
+
+{% block content %}
+
+{% if role == 'admin' %}
+<h1>Homepage Admin</h1>
+{% include 'navbar.html' %}
+
+{% for res in result %}
+    <p>Email: {{ res.email }}</p>
+    <!-- <p>Password: {{ res.password }}</p> -->
+{% endfor %}
+{% endif %}
+
+{% if role == 'pengguna' %}
+<h1>Homepage Pengguna</h1>
+{% include 'navbar.html' %}
+
+{% for res in result %}
+    <p>Email: {{ res.email }}</p>
+    <p>Nama Area Pertanian: {{ res.nama_area_pertanian }}</p>
+    <p>XP: {{ res.xp }}</p>
+    <p>Koin: {{ res.koin }}</p>
+    <p>Level: {{ res.level }}</p>
+{% endfor %}
+{% endif %}
+
+<!-- {% for res in result %}
+    <p>Email: {{ res.email }}</p>
+    <p>Password: {{ res.password }}</p>
+{% endfor %} -->
+
+<!-- <p>Role: {{ request.session.role }}</p> -->
+<!-- <p>Role: {{ role }}</p> -->
+<!-- <p><a href="{% url 'main:logout' %}">Log Out</a></p> -->
+
+{% endblock content %}
