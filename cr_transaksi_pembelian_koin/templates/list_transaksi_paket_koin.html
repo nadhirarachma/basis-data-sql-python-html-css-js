@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/list_paket_koin.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+  
+    <h1>List Transasksi Paket Koin</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+    <table>
+        <tr>
+        <!-- <th>No</th> -->
+        <th>Email Pengguna</th>
+        <th>Waktu Pembelian</th>
+        <th>Jumlah</th>
+        <th>Cara Pembayaran</th>
+        <th>Paket Koin</th>
+        <th>Total Biaya</th>
+        </tr>
+
+        {% for res in result %}
+        <tr>
+            <!-- <th>{{ res }}</th> -->
+            <th>{{ res.Email }}</th>
+            <th>{{ res.Waktu }}</th>
+            <th>{{ res.Jumlah }}</th>
+            <th>{{ res.Cara_Pembayaran }}</th>
+            <th>{{ res.Paket_Koin }}</th>
+            <th>{{ res.Total_Biaya }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <table>
+        <tr>
+        <!-- <th>No</th> -->
+        <th>Email Pengguna</th>
+        <th>Waktu Pembelian</th>
+        <th>Jumlah</th>
+        <th>Cara Pembayaran</th>
+        <th>Paket Koin</th>
+        <th>Total Biaya</th>
+        </tr>
+
+        {% for res in result %}
+        <tr>
+            <!-- <th>{{ res }}</th> -->
+            <th>{{ res.Email }}</th>
+            <th>{{ res.Waktu }}</th>
+            <th>{{ res.Jumlah }}</th>
+            <th>{{ res.Cara_Pembayaran }}</th>
+            <th>{{ res.Paket_Koin }}</th>
+            <th>{{ res.Total_Biaya }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
+
+
+

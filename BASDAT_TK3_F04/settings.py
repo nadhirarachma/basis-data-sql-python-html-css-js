@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'crud_produk',
+    'crud_paket_koin',
+    'cr_transaksi_pembelian_koin'
 ]
 
 MIDDLEWARE = [

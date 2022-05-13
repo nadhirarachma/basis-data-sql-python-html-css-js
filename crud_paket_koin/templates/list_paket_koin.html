@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/list_paket_koin.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+  
+    <h1>List Paket Koin</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+    <table>
+        <tr>
+        <!-- <th>No</th> -->
+        <th>Paket Koin</th>
+        <th>Harga</th>
+        <th>Action</th>
+        </tr>
+
+        {% for res in result %}
+        <tr>
+            <!-- <th>{{ res }}</th> -->
+            <th>{{ res.Jumlah_Koin }}</th>
+            <th>{{ res.Harga }}</th>
+            <th>
+                <button class="button">
+                    <a href="/crud-paket-koin/update-paket-koin">Update</a>
+                </button>
+                <button class="button">
+                    <a href="#">Delete</a>
+                </button>
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <table>
+        <tr>
+        <!-- <th>No</th> -->
+        <th>Paket Koin</th>
+        <th>Harga</th>
+        <th>Action</th>
+        </tr>
+
+        {% for res in result %}
+        <tr>
+            <!-- <th>{{ res }}</th> -->
+            <th>{{ res.Jumlah_Koin }}</th>
+            <th>{{ res.Harga }}</th>
+            <th><button class="button">
+                <a href="/cr-transaksi-pembelian-koin/form-transaksi-paket-koin">Beli</a>
+                </button>
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
+
+
+
