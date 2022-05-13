@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'BASDAT_TK3_F04.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASE_URL = 'postgres://eotkhrpswqytom:d77b24722957842467166555a6160903cc72611e6cc81b25f7f333656426ed97@ec2-34-236-94-53.compute-1.amazonaws.com:5432/d14elb47abga96'
+DATABASE_URL = 'postgres://gnsrnwdpjbuetn:e70918334e5e99451806f606c8b5da4ce36e63799883d0cf9524c7b6c7edab3f@ec2-34-201-95-176.compute-1.amazonaws.com:5432/d4jq2egl4ist4e'
 
 DATABASES = {
     'default': {

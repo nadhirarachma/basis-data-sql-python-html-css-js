@@ -6,6 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/list_produk.css' %}">
 
   <title>TK3-F04</title>
@@ -47,7 +48,6 @@
         <th>Nama</th>
         <th>Harga Jual</th>
         <th>Sifat</th>
-        <th>Action</th>
         </tr>
 
         {% for res in result %}
@@ -56,7 +56,6 @@
             <th>{{ res.nama }}</th>
             <th>{{ res.harga_jual }}</th>
             <th>{{ res.sifat_produk }}</th>
-            <th>Button</th>
         </tr>
         {% endfor %}
     </table>
