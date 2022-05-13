@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/list_produk.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+  
+    <h1>List Produk</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+    <table>
+        <tr>
+        <th>Produk Makanan</th>
+        <th>Alat Produksi</th>
+        <th>Durasi Produksi</th>
+        <th>Jumlah Produk Hasil Produksi</th>
+        <th>Action</th>
+        </tr>
+
+        {% for res in result %}
+        <tr>
+            <th>{{ res.id_alat_produksi }}</th>
+            <th>{{ res.id_produk_makanan }}</th>
+            <th>{{ res.durasi }}</th>
+            <th>{{ res.jumlah_unit_hasil }}</th>
+            <th>Button</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <table>
+        <tr>
+        <th>Produk Makanan</th>
+        <th>Alat Produksi</th>
+        <th>Durasi Produksi</th>
+        <th>Jumlah Produk Hasil Produksi</th>
+        <th>Action</th>
+        </tr>
+
+        {% for res in result %}
+        <tr>
+            <th>{{ res.id_alat_produksi }}</th>
+            <th>{{ res.id_produk_makanan }}</th>
+            <th>{{ res.durasi }}</th>
+            <th>{{ res.jumlah_unit_hasil }}</th>
+            <th>Button</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
+
+
+

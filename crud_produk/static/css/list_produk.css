@@ -1,6 +1,7 @@
 table, th, td, tr {
     border: 1px solid black;
-    /* font-size: medium; */
+    font-size: medium;
+    font-weight: normal;
 }
 /* 
 h1 {
