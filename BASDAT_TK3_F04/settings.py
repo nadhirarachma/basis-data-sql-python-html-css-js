@@ -110,7 +110,7 @@ DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
 import sys
 if 'test' in sys.argv:
     DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'mydatabase'
     }
 
