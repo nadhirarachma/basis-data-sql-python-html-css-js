@@ -9,15 +9,16 @@ def tupleFetch(cursor):
     nt_result = namedtuple('Result', [col[0] for col in desc])
     return [nt_result(*row) for row in cursor.fetchall()]
 
-def listProduk(request):
+def listProduksi(request):
    if request.session.has_key('email'):
         cursor = connection.cursor()
         result = []
+        role =''
         try:
             cursor.execute("SET SEARCH_PATH TO HIDAY")
-            cursor.execute("SELECT id, nama, harga_jual, sifat_produk, CASE WHEN id LIKE '%HP%' THEN 'Hasil Panen' WHEN id LIKE '%PH%' THEN 'Produk Hewan' WHEN id LIKE '%PM%' THEN 'Produk Makanan' END AS jenisproduk FROM PRODUK")
+            cursor.execute("SELECT PRO.nama AS nama, A.nama AS namaAset, durasi, jumlah_unit_hasil FROM PRODUKSI P JOIN ASET A ON P.Id_alat_produksi = A.id JOIN PRODUK PRO ON P.Id_produk_makanan = PRO.id")
             result = tupleFetch(cursor)
-            if (request.session['role'] == ['admin']):
+            if (request.session['role'] == ['admin']):        
                 role = "admin"
 
             else:
@@ -33,25 +34,42 @@ def listProduk(request):
                 temp[i+1] = result[i]
             resultNum = list(temp.items())
 
-        return render(request, 'list_produk.html', {"result" : resultNum, "role" : role})
+        return render(request, 'list_produksi.html', {"result" : resultNum, "role" : role})
 
    else:
         return HttpResponseRedirect('/login')
 
-def buatProduk(request):
+def buatProduksi(request):
     if (request.session['role'] == ['admin']):
         role = "admin"
 
     else:
         role = "pengguna"
     
-    return render(request, 'buat_produk.html', {"form" : BuatProduk, "role" : role})
+    return render(request, 'buat_produksi.html', {"form" : BuatProduksi, "role" : role})
 
-def ubahProduk(request):
+def detailProduksi(request, pk):
+    cursor = connection.cursor()
+    result = []
+    cursor.execute("SET SEARCH_PATH TO HIDAY")
+    cursor.execute("SELECT * FROM PRODUKSI")
+    result = tupleFetch(cursor)
+    resultt = result[pk+1]
+
+    cursor.close()
+
+    temp = {}
+    for i in range(len(result)-1):
+        temp[i+1] = result[i]
+    resultNum = list(temp.items())
+    
+    return render(request, 'detail_produksi.html', {"res" : resultNum[pk]})
+
+def ubahProduksi(request):
     if (request.session['role'] == ['admin']):
         role = "admin"
 
     else:
         role = "pengguna"
     
-    return render(request, 'ubah_produk.html', {"form" : UbahProduk, "role" : role})
+    return render(request, 'ubah_produksi.html', {"form" : UbahProduksi, "role" : role})

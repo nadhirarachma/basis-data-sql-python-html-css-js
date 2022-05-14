@@ -20,6 +20,7 @@
     {% include 'navbar.html' %}
     <table>
         <tr>
+        <th>No</th>
         <th>Jenis</th>
         <th>Nama</th>
         <th>Harga Jual</th>
@@ -27,13 +28,14 @@
         <th>Action</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
-            <th>{{ res.jenis }}</th>
+            <th>{{ no }}</th>
+            <th>{{ res.jenisproduk }}</th>
             <th>{{ res.nama }}</th>
             <th>{{ res.harga_jual }}</th>
             <th>{{ res.sifat_produk }}</th>
-            <th>Button</th>
+            <th><a href="{% url 'crud_produk:ubah-produk' %}">Update</a> <br> <a href="#">Delete</a> </th>
         </tr>
         {% endfor %}
     </table>
@@ -44,15 +46,17 @@
 
     <table>
         <tr>
+        <th>No</th>
         <th>Jenis</th>
         <th>Nama</th>
         <th>Harga Jual</th>
         <th>Sifat</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
-            <th>{{ res.jenis }}</th>
+            <th>{{ no }}</th>
+            <th>{{ res.jenisproduk }}</th>
             <th>{{ res.nama }}</th>
             <th>{{ res.harga_jual }}</th>
             <th>{{ res.sifat_produk }}</th>

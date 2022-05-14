@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/list_histori_makanan.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+  
+    <h1>List Produk</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+    <table>
+        <tr>
+        <th>No</th>
+        <th>Email Pengguna</th>
+        <th>Waktu Awal</th>
+        <th>Waktu Selesai</th>
+        <th>Jumlah</th>
+        <th>XP</th>
+        <th>Produk Makanan</th>
+        <th>Alat Produksi</th>
+        </tr>
+
+        {% for no, res in result %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.email }}</th>
+            <th>{{ res.waktu_awal }}</th>
+            <th>{{ res.waktu_selesai }}</th>
+            <th>{{ res.jumlah }}</th>
+            <th>{{ res.xp }}</th>
+            <th>{{ res.namaproduk }}</th>
+            <th>{{ res.asetalat }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Waktu Awal</th>
+            <th>Waktu Selesai</th>
+            <th>Jumlah</th>
+            <th>XP</th>
+            <th>Produk Makanan</th>
+            <th>Alat Produksi</th>
+        </tr>
+
+        {% for no, res in result %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.waktu_awal }}</th>
+            <th>{{ res.waktu_selesai }}</th>
+            <th>{{ res.jumlah }}</th>
+            <th>{{ res.xp }}</th>
+            <th>{{ res.namaproduk }}</th>
+            <th>{{ res.asetalat }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
+
+
+

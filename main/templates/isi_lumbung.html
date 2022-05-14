@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/isi_lumbung.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+  
+    <h1>Detail Lumbung</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <h3>Tabel Produk Hasil Panen</h3>
+    <table>
+        <tr>
+        <th>No</th>
+        <th>Email Pemilik Lumbung</th>
+        <th>ID Produk</th>
+        <th>Nama Produk</th>
+        <th>Harga Jual</th>
+        <th>Sifat Produk</th>
+        <th>Jumlah Produk</th>
+        </tr>
+
+        {% for no, res in result2 %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.id_lumbung }}</th>
+            <th>{{ res.id }}</th>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.harga_jual }}</th>
+            <th>{{ res.sifat_produk }}</th>
+            <th>{{ res.jumlah }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Tabel Produk Hewan</h3>
+    <table>
+        <tr>
+        <th>No</th>
+        <th>Email Pemilik Lumbung</th>
+        <th>ID Produk</th>
+        <th>Nama Produk</th>
+        <th>Harga Jual</th>
+        <th>Sifat Produk</th>
+        <th>Jumlah Produk</th>
+        </tr>
+
+        {% for no, res in result3 %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.id_lumbung }}</th>
+            <th>{{ res.id }}</th>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.harga_jual }}</th>
+            <th>{{ res.sifat_produk }}</th>
+            <th>{{ res.jumlah }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <h3>Tabel Produk Makanan</h3>
+    <table>
+        <tr>
+        <th>No</th>
+        <th>Email Pemilik Lumbung</th>
+        <th>ID Produk</th>
+        <th>Nama Produk</th>
+        <th>Harga Jual</th>
+        <th>Sifat Produk</th>
+        <th>Jumlah Produk</th>
+        </tr>
+
+        {% for no, res in result %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.id_lumbung }}</th>
+            <th>{{ res.id }}</th>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.harga_jual }}</th>
+            <th>{{ res.sifat_produk }}</th>
+            <th>{{ res.jumlah }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    {% for res in result4 %}
+    <h3>Level: {{ res.level }}</h3>    
+    <h3>Kapasitas: {{ res.total }}/{{ res.kapasitas_maksimal }}</h3> 
+    {% endfor %}
+
+    <h3>Tabel Produk Hasil Panen</h3>
+    <table>
+        <tr>
+        <th>No</th>
+        <th>ID Produk</th>
+        <th>Nama Produk</th>
+        <th>Harga Jual</th>
+        <th>Sifat Produk</th>
+        <th>Jumlah Produk</th>
+        </tr>
+
+        {% for no, res in result2 %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.id }}</th>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.harga_jual }}</th>
+            <th>{{ res.sifat_produk }}</th>
+            <th>{{ res.jumlah }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Tabel Produk Hewan</h3>
+    <table>
+        <tr>
+        <th>No</th>
+        <th>ID Produk</th>
+        <th>Nama Produk</th>
+        <th>Harga Jual</th>
+        <th>Sifat Produk</th>
+        <th>Jumlah Produk</th>
+        </tr>
+
+        {% for no, res in result3 %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.id }}</th>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.harga_jual }}</th>
+            <th>{{ res.sifat_produk }}</th>
+            <th>{{ res.jumlah }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <h3>Tabel Produk Makanan</h3>
+    <table>
+        <tr>
+        <th>No</th>
+        <th>ID Produk</th>
+        <th>Nama Produk</th>
+        <th>Harga Jual</th>
+        <th>Sifat Produk</th>
+        <th>Jumlah Produk</th>
+        </tr>
+
+        {% for no, res in result %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.id }}</th>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.harga_jual }}</th>
+            <th>{{ res.sifat_produk }}</th>
+            <th>{{ res.jumlah }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+</body>
+
+</html>
+
+
+
