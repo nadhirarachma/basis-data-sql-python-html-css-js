@@ -24,7 +24,7 @@
         <input type="submit" value="Buat">
     </form> -->
 
-    <form action = "" method = "POST">
+    <form name="form" action = "" method = "POST" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
             <label for="id_ID">Jenis Produk</label>
@@ -37,15 +37,15 @@
             </br>
             <label for="id_Nama">Nama</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Nama" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Nama" >
             </br>
             <label for="id_HargaJual">Harga Jual</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="HargaJual" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="HargaJual" >
             </br>
             <label for="id_SifatProduk">Sifat Produk</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="SifatProduk" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="SifatProduk" >
             </br>
             <div align='center'>
                 <button type='submit'>Buat</button>      
@@ -63,6 +63,18 @@
     {% endif %}
 
 </body>
+
+<script>
+    function validateForm() {
+        var x = document.forms["form"]['Nama'].value;
+        var y = document.forms["form"]['HargaJual'].value;
+        var z = document.forms["form"]['SifatProduk'].value;
+        if (x == "" || y == "" || z == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+</script>
 
 </html>
 

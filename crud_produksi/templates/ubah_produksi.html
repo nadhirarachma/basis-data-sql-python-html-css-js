@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ubah_produksi.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Ubah Produksi</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <form action = "" method = "POST" name="form" onsubmit = "return validateForm()"> 
+        {% csrf_token %}
+        <div class="container" align='center'>
+            <label for="">Nama Produk Makanan</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Nama Produk yang Dipilih" name="Nama" disabled>
+            </br>
+            <label for="">Alat Produksi</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Alat Produksi yang Dipilih" name="AlatProduksi">
+            </br>
+            <label for="">Durasi Produksi (dalam menit)</label>
+            </br>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="DurasiProduksi">
+            </br>
+            <label for="">Jumlah Produk yang Dihasilkan</label>
+            </br>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="JumlahProduk">
+            </br>
+
+            <table>
+                <tr>
+                <th>Bahan</th>
+                <th>Jumlah</th>
+                </tr>
+        
+                <tr>
+                    <th>Gula Pasir</th>
+                    <th>1</th>
+                </tr>
+
+                <tr>
+                    <th>Tepung</th>
+                    <th>1</th>
+                </tr>
+
+                <tr>
+                    <th>Telur</th>
+                    <th>3</th>
+                </tr>
+            </table>
+
+            <br>
+            <div align='center'>
+                <button type='submit'>Simpan</button>      
+            </div>
+        </div>
+        <!-- notif blm diisi blm -->
+    </form>
+
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <h1>Pengguna tidak dapat mengubah Produksi</h1>
+    {% endif %}
+
+</body>
+
+<script>
+    function validateForm() {
+        var y = document.forms["form"]['AlatProduksi'].value;
+        var z = document.forms["form"]['DurasiProduksi'].value;
+        var xx = document.forms["form"]['JumlahProduk'].value;
+        if (y == "" || z == "" || xx == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+</script>
+
+</html>
+
+
+

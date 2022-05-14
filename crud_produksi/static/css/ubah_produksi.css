@@ -1,14 +1,12 @@
+br {
+    display: block;
+    margin: 6px 0;
+ }
+ 
 table, th, td, tr {
     border: 1px solid black;
     font-size: medium;
     font-weight: normal;
-}
+ }
 
-table {
-    width: 100%;
-}
-/* 
-h1 {
-    color: aquamarine;
-} */
-
+ 

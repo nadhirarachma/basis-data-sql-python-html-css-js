@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('crud-produk/', include('crud_produk.urls')),
+    path('crud-produksi/', include('crud_produksi.urls')),
+    path('cr-histori-pmakanan/', include('cr_histori_pmakanan.urls')),
 ]

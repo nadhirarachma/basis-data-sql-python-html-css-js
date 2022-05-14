@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_produk.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Detail Produksi</h1>
+    {% include 'navbar.html' %}
+    
+    {{ res.id_produk_makanan }}
+    {{ res.id_alat_produksi }}
+
+    <h2>Nama Produk Makanan</h2>
+    <p> </p>
+
+    <h2>Alat Produksi</h2>
+
+    <h2>Durasi Produksi (dalam menit)</h2>
+    {{ res.durasi }}
+
+    <h2>Jumlah Produk yang Dihasilkan</h2>
+    {{ res.jumlah_unit_hasil }}
+
+    <h2>Daftar Bahan yang Dibutuhkan</h2>
+
+    <!-- {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    {% endif %} -->
+
+</body>
+
+</html>
+
+
+

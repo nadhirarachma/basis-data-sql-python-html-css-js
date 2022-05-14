@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/buat_produk.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_produksi.css' %}">
 
   <title>TK3-F04</title>
 </head>
@@ -24,24 +24,24 @@
         <input type="submit" value="Buat">
     </form> -->
 
-    <form action = "" method = "POST">
+    <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
             <label for="">Nama Produksi Makanan</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Nama">
             </br>
             <label for="">Alat Produksi</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="AlatProduksi">
             </br>
             <label for="">Durasi Produksi (dalam menit)</label>
             </br>
-            <input type="number" class="form-control" placeholder="Harap diisi" name="" required>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="DurasiProduksi">
             </br>
             <label for="">Jumlah Produk yang Dihasilkan</label>
             </br>
-            <input type="number" class="form-control" placeholder="Harap diisi" name="" required>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="JumlahProduk">
             </br>
 
             <a>Daftar Bahan Yang Dibutuhkan</a>
@@ -55,7 +55,7 @@
             </select>
 
             <label for="">Jumlah</label>
-            <input type="number" class="form-control" placeholder="Harap diisi" name="" required>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="J1">
             </br>
 
             <div align='center'>
@@ -77,6 +77,21 @@
     {% endif %}
 
 </body>
+
+<script>
+    function validateForm() {
+        var x = document.forms["form"]['Nama'].value;
+        var y = document.forms["form"]['AlatProduksi'].value;
+        var z = document.forms["form"]['DurasiProduksi'].value;
+        var xx = document.forms["form"]['JumlahProduk'].value;
+        var yy = document.forms["form"]['J1'].value;
+
+        if (x == "" || y == "" || z == "" || xx == "" || yy == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+</script>
 
 </html>
 

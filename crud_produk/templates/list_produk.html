@@ -31,11 +31,11 @@
         {% for no, res in result %}
         <tr>
             <th>{{ no }}</th>
-            <th>{{ res.jenis }}</th>
+            <th>{{ res.jenisproduk }}</th>
             <th>{{ res.nama }}</th>
             <th>{{ res.harga_jual }}</th>
             <th>{{ res.sifat_produk }}</th>
-            <th>Button</th>
+            <th><a href="{% url 'crud_produk:ubah-produk' %}">Update</a> <br> <a href="#">Delete</a> </th>
         </tr>
         {% endfor %}
     </table>
@@ -56,7 +56,7 @@
         {% for no, res in result %}
         <tr>
             <th>{{ no }}</th>
-            <th>{{ res.jenis }}</th>
+            <th>{{ res.jenisproduk }}</th>
             <th>{{ res.nama }}</th>
             <th>{{ res.harga_jual }}</th>
             <th>{{ res.sifat_produk }}</th>

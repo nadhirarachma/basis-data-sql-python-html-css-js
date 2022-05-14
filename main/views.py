@@ -38,7 +38,6 @@ def login(request):
         try:
             cursor = connection.cursor()
             cursor.execute("SET SEARCH_PATH TO HIDAY")
-            # cursor.execute("SELECT * FROM ADMIN AS ADM WHERE ADM.Email ='" + email + "' AND ADM.Password = '" + password + "'")
             cursor.execute("SELECT * FROM AKUN WHERE Email ='" + email + "'")
             result = cursor.fetchone()
 
@@ -117,3 +116,60 @@ def logout(request):
    except:
         pass
    return HttpResponseRedirect('/login')
+
+def isiLumbung(request):
+   if request.session.has_key('email'):
+        cursor = connection.cursor()
+        result = []
+        result2 = []
+        result3 = []
+        result4 = []
+        role =''
+        try:
+            if (request.session['role'] == ['admin']):
+                cursor.execute("SET SEARCH_PATH TO HIDAY")
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, PRODUK_MAKANAN PM WHERE  LM.id_produk = PR.id AND PR.id = PM.id_produk")
+                result = tupleFetch(cursor)
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, HASIL_PANEN HP WHERE  LM.id_produk = PR.id AND PR.id = HP.id_produk")
+                result2 = tupleFetch(cursor)
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, PRODUK_HEWAN PH WHERE  LM.id_produk = PR.id AND PR.id = PH.id_produk")
+                result3 = tupleFetch(cursor)
+                role = "admin"
+
+            else:
+                email = str(request.session['email'][0])
+                cursor.execute("SET SEARCH_PATH TO HIDAY")
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, PRODUK_MAKANAN PM WHERE LM.id_produk = PR.id AND PR.id = PM.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
+                result = tupleFetch(cursor)
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, HASIL_PANEN HP WHERE LM.id_produk = PR.id AND PR.id = HP.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
+                result2 = tupleFetch(cursor)
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, PRODUK_HEWAN PH WHERE LM.id_produk = PR.id AND PR.id = PH.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
+                result3 = tupleFetch(cursor)
+                cursor.execute("SELECT *  FROM LUMBUNG L WHERE L.email = '" + ''.join(email) + "'")
+                result4 = tupleFetch(cursor)
+                role = "pengguna"
+
+        except Exception as e:
+            print(e)
+        
+        finally:
+            cursor.close()
+            temp = {}
+            for i in range(len(result)):
+                temp[i+1] = result[i]
+            resultNum = list(temp.items())
+
+            temp = {}
+            for i in range(len(result2)):
+                temp[i+1] = result2[i]
+            resultNum2 = list(temp.items())
+
+            temp = {}
+            for i in range(len(result3)):
+                temp[i+1] = result3[i]
+            resultNum3 = list(temp.items())
+
+        return render(request, 'isi_lumbung.html', {"result" : resultNum, "result2" : resultNum2, "result3" : resultNum3,"result4" : result4, "role" : role})
+
+   else:
+        return HttpResponseRedirect('/login')
