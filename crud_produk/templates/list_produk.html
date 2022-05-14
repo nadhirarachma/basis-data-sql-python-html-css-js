@@ -20,6 +20,7 @@
     {% include 'navbar.html' %}
     <table>
         <tr>
+        <th>No</th>
         <th>Jenis</th>
         <th>Nama</th>
         <th>Harga Jual</th>
@@ -27,8 +28,9 @@
         <th>Action</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
+            <th>{{ no }}</th>
             <th>{{ res.jenis }}</th>
             <th>{{ res.nama }}</th>
             <th>{{ res.harga_jual }}</th>
@@ -44,14 +46,16 @@
 
     <table>
         <tr>
+        <th>No</th>
         <th>Jenis</th>
         <th>Nama</th>
         <th>Harga Jual</th>
         <th>Sifat</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
+            <th>{{ no }}</th>
             <th>{{ res.jenis }}</th>
             <th>{{ res.nama }}</th>
             <th>{{ res.harga_jual }}</th>

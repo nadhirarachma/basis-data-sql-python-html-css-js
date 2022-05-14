@@ -20,6 +20,7 @@
     {% include 'navbar.html' %}
     <table>
         <tr>
+        <th>No</th>
         <th>Produk Makanan</th>
         <th>Alat Produksi</th>
         <th>Durasi Produksi</th>
@@ -27,8 +28,9 @@
         <th>Action</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
+            <th>{{ no }}</th>
             <th>{{ res.id_alat_produksi }}</th>
             <th>{{ res.id_produk_makanan }}</th>
             <th>{{ res.durasi }}</th>
@@ -44,6 +46,7 @@
 
     <table>
         <tr>
+        <th>No</th>
         <th>Produk Makanan</th>
         <th>Alat Produksi</th>
         <th>Durasi Produksi</th>
@@ -51,8 +54,9 @@
         <th>Action</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
+            <th>{{ no }}</th>
             <th>{{ res.id_alat_produksi }}</th>
             <th>{{ res.id_produk_makanan }}</th>
             <th>{{ res.durasi }}</th>

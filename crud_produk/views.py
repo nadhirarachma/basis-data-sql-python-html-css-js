@@ -3,7 +3,6 @@ from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.db import connection
 from collections import namedtuple
 from .forms import *
-# Create your views here.
 
 def tupleFetch(cursor):
     desc = cursor.description
@@ -32,8 +31,12 @@ def listProduk(request):
         
         finally:
             cursor.close()
+            temp = {}
+            for i in range(len(result)-1):
+                temp[i+1] = result[i]
+            resultNum = list(temp.items())
 
-        return render(request, 'list_produk.html', {"result" : result, "role" : role})
+        return render(request, 'list_produk.html', {"result" : resultNum, "role" : role})
 
    else:
         return HttpResponseRedirect('/login')
@@ -60,8 +63,40 @@ def listProduksi(request):
         
         finally:
             cursor.close()
+            temp = {}
+            for i in range(len(result)-1):
+                temp[i+1] = result[i]
+            resultNum = list(temp.items())
 
-        return render(request, 'list_produksi.html', {"result" : result, "role" : role})
+        return render(request, 'list_produksi.html', {"result" : resultNum, "role" : role})
 
    else:
         return HttpResponseRedirect('/login')
+
+
+def buatProduk(request):
+    if (request.session['role'] == ['admin']):
+        role = "admin"
+
+    else:
+        role = "pengguna"
+    
+    return render(request, 'buat_produk.html', {"form" : BuatProduk, "role" : role})
+
+def ubahProduk(request):
+    if (request.session['role'] == ['admin']):
+        role = "admin"
+
+    else:
+        role = "pengguna"
+    
+    return render(request, 'ubah_produk.html', {"form" : UbahProduk, "role" : role})
+
+def buatProduksi(request):
+    if (request.session['role'] == ['admin']):
+        role = "admin"
+
+    else:
+        role = "pengguna"
+    
+    return render(request, 'buat_produksi.html', {"form" : BuatProduksi, "role" : role})
