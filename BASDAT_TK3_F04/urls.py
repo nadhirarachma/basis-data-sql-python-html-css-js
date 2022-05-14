@@ -23,5 +23,7 @@ urlpatterns = [
     path('crud-produk/', include('crud_produk.urls')),
     path('crud-paket-koin/', include('crud_paket_koin.urls')),
     path('cr-transaksi-pembelian-koin/', include('cr_transaksi_pembelian_koin.urls')),
-    
+    path('cr-transaksi-upgrade-lumbung/', include('cr_transaksi_update_lumbung.urls')),
+    path('cr-histori-tanaman/', include('cr_histori_tanaman.urls')),
+
 ]

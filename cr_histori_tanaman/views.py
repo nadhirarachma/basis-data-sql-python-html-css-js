@@ -12,7 +12,7 @@ def tupleFetch(cursor):
     nt_result = namedtuple('Result', [col[0] for col in desc])
     return [nt_result(*row) for row in cursor.fetchall()]
 
-def listTransaksiPaketKoin(request):
+def listHistoriProduksiTanaman(request):
     # result = []
     # FormLogin = LoginForm(request.POST)
 
@@ -24,18 +24,15 @@ def listTransaksiPaketKoin(request):
         try:
             cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):                
-                cursor.execute("SELECT * FROM TRANSAKSI_PEMBELIAN_KOIN")
+                cursor.execute("SELECT * FROM TRANSAKSI_UPGRADE_LUMBUNG")
                 result = tupleFetch(cursor)
                 role = "admin"
 
-
-            elif (request.session['role'] == ['pengguna']):
-                print("aaa") 
+            else:
                 email = request.session['email'][0]
-                cursor.execute("SELECT * FROM TRANSAKSI_PEMBELIAN_KOIN WHERE Email='" + email + "'")
+                cursor.execute("SELECT HT.email, HT.waktu_awal :: time as Waktu_awal, Hp.waktu_selesai :: time as Waktu_selesai, HP.jumlah, HP.xp, A.nama FROM HISTORI_TANAMAN AS HT, HISTORI_PRODUKSI AS HP, BIBIT_TANAMAN AS BT, ASET AS A WHERE HT.email = HP.email AND HT.waktu_awal=HP.waktu_awal AND HT.id_bibit_tanaman =BT.id_aset AND BT.id_aset=A.id AND HT.Email='" + email + "'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
-            
 
         except Exception as e:
             print(e)
@@ -43,12 +40,12 @@ def listTransaksiPaketKoin(request):
         finally:
             cursor.close()
 
-        return render(request, 'list_transaksi_paket_koin.html', {"result" : result, "role" : role})
+        return render(request, 'list_histori_produksi_tanaman.html', {"result" : result, "role" : role})
 
     else:
         return HttpResponseRedirect('/login')
 
-def formPaketKoin(request):
+def formProduksiTanaman(request):
     role = ''
     
     if (request.session['role'] == ['admin']):
@@ -56,5 +53,5 @@ def formPaketKoin(request):
 
     else:
         role = "pengguna"
-    return render(request, 'form_paket_koin.html', {'form' : FormPaketKoin, "role" : role})
+    return render(request, 'form_produksi_tanaman.html', {'form' : FormProduksiTanaman, "role" : role})
 
