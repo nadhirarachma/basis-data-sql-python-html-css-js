@@ -7,42 +7,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/buat_produk.css' %}">
+  <link rel="stylesheet" href="{% static 'css/detail_produksi.css' %}">
 
   <title>TK3-F04</title>
 </head>
 
+{% include 'navbar.html' %}
 <body>
     <h1>Detail Produksi</h1>
-    {% include 'navbar.html' %}
     
-    {{ res.id_produk_makanan }}
-    {{ res.id_alat_produksi }}
+
+    <div align = 'center'>
 
     <h2>Nama Produk Makanan</h2>
-    <p> </p>
+    <p>{{ res.nama }}</p>
 
     <h2>Alat Produksi</h2>
+    <p>{{ res.namaaset }}</p>
 
     <h2>Durasi Produksi (dalam menit)</h2>
-    {{ res.durasi }}
+    <p>{{ res.durasi }}</p>
 
     <h2>Jumlah Produk yang Dihasilkan</h2>
-    {{ res.jumlah_unit_hasil }}
+    <p>{{ res.jumlah_unit_hasil }}</p>
 
     <h2>Daftar Bahan yang Dibutuhkan</h2>
 
-    <!-- {% if role == 'admin' %}
-    {% include 'navbar.html' %}
+    <table>
+      <tr>
+      <th>No</th>
+      <th>Bahan</th>
+      <th>Jumlah</th>
+      </tr>
 
-
-    {% endif %}
-
-    {% if role == 'pengguna' %}
-    {% include 'navbar.html' %}
-
-    {% endif %} -->
-
+      {% for no,ress in result2 %}
+      <tr>
+          <th>{{ no }}</th>
+          <th>{{ ress.bahan }}</th>
+          <th>{{ ress.jumlah }}</th>
+      </tr>
+      {% endfor %}
+  </table>
+    
+    </div>
 </body>
 
 </html>
