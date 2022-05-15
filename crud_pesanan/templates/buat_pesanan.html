@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/create_histori_hewan' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Buat Pesanan</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <!-- <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Buat">
+    </form> -->
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            <label for="">ID Pesanan</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="" required value="PSxxx" disabled>
+            </br>
+            </br>
+            <label for="">Nama Pesanan</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="" required>
+            </br>
+            </br>
+            <label for="">Jenis Pesanan</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="" required>
+            </br>
+            </br>
+            <label for="">Detail Pesanan</label>
+            <select id="" name="ID">
+            </select>
+            </br>
+            </br>
+            <div align='center'>
+                <button type='submit'>Buat</button>      
+            </div>
+        </div> 
+        <!-- notif blm diisi blm -->
+        <!-- tambah bahan blm -->
+    </form>
+
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <h1>Pengguna tidak dapat membuat pesanan</h1>
+    {% endif %}
+
+</body>
+
+</html>

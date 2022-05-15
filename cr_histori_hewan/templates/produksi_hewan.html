@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/create_histori_hewan' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Buat Histori Hewan</h1>
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <!-- <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Buat">
+    </form> -->
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            <label for="">ID Hewan</label>
+            <select id="" name="ID">
+            </select>
+            </br>
+            </br>
+            <label for="">Jumlah</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="" required>
+            </br>
+            </br>
+            <label for="">XP</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="" required value="5" disabled>
+            </br>
+            </br>
+            <div align='center'>
+                <button type='submit'>Buat</button>      
+            </div>
+        </div> 
+        <!-- notif blm diisi blm -->
+        <!-- tambah bahan blm -->
+    </form>
+
+    {% endif %}
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <h1>Admin tidak dapat buat Produksi Hewan</h1>
+    {% endif %}
+
+</body>
+
+</html>
