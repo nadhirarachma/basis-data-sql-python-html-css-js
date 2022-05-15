@@ -30,7 +30,7 @@ def listTransaksiLumbung(request):
 
             else:
                 email = request.session['email'][0]
-                cursor.execute("SELECT * FROM TRANSAKSI_UPGRADE_LUMBUNG WHERE Email='" + email + "'")
+                cursor.execute("SELECT * FROM TRANSAKSI_UPGRADE_LUMBUNG WHERE email='" + email + "'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -39,8 +39,12 @@ def listTransaksiLumbung(request):
         
         finally:
             cursor.close()
+            temp = {}
+            for i in range(len(result)):
+                temp[i+1] = result[i]
+            resultNum = list(temp.items())
 
-        return render(request, 'list_transaksi_lumbung.html', {"result" : result, "role" : role})
+        return render(request, 'list_transaksi_lumbung.html', {"result" : resultNum, "role" : role})
 
     else:
         return HttpResponseRedirect('/login')

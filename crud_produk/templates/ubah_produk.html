@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,45 +12,39 @@
 </head>
 
 <body>
-    <h1>Form Buat Produk</h1>
+    <h1>Form Ubah Produk</h1>
 
     {% if role == 'admin' %}
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
-    <form name="form" action = "" method = "POST" onsubmit = "return validateForm()">
+    <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
             <label for="id_ID">Jenis Produk</label>
             </br>
-            <select id="id_ID" name="ID">
+            <select id="id_ID" name="ID" disabled>
                 <option value="HP">Hasil Panen</option>
                 <option value="PH">Produk Hewan</option>
                 <option value="PM">Produk Makanan</option>
-              </select>
+            </select>
             </br>
             <label for="id_Nama">Nama</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Nama" >
+            <input type="text" class="form-control" placeholder="Nama Produk yang Dipilih" name="Nama" disabled>
             </br>
             <label for="id_HargaJual">Harga Jual</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="HargaJual" >
+            <input type="number" class="form-control" placeholder="Harap diisi" name="HargaJual">
             </br>
             <label for="id_SifatProduk">Sifat Produk</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="SifatProduk" >
+            <input type="text" class="form-control" placeholder="Harap diisi" name="SifatProduk">
             </br>
             <div align='center'>
-                <button type='submit'>Buat</button>      
+                <button type='submit'>Simpan</button>      
             </div>
-        </div> 
-        <!-- notif blm diisi blm -->
+        </div
+        ><!-- notif blm diisi blm -->
     </form>
 
     {% endif %}
@@ -59,17 +52,17 @@
     {% if role == 'pengguna' %}
     {% include 'navbar.html' %}
 
-    <h1>Pengguna tidak dapat buat Produk</h1>
+    <h1>Pengguna tidak dapat mengubah Produk</h1>
+
     {% endif %}
 
 </body>
 
 <script>
     function validateForm() {
-        var x = document.forms["form"]['Nama'].value;
         var y = document.forms["form"]['HargaJual'].value;
         var z = document.forms["form"]['SifatProduk'].value;
-        if (x == "" || y == "" || z == "") {
+        if (y == "" || z == "") {
             alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
             return false;
         }

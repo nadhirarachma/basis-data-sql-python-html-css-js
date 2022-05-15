@@ -32,7 +32,8 @@ def listTransaksiPaketKoin(request):
             elif (request.session['role'] == ['pengguna']):
                 print("aaa") 
                 email = request.session['email'][0]
-                cursor.execute("SELECT * FROM TRANSAKSI_PEMBELIAN_KOIN WHERE Email='" + email + "'")
+                cursor.execute("SELECT * FROM TRANSAKSI_PEMBELIAN_KOIN WHERE email='" + email + "'")
+                print("aaaI")
                 result = tupleFetch(cursor)
                 role = "pengguna"
             
@@ -42,8 +43,13 @@ def listTransaksiPaketKoin(request):
         
         finally:
             cursor.close()
+            temp = {}
+            for i in range(len(result)):
+                temp[i+1] = result[i]
+            resultNum = list(temp.items())
+            print("aaaI")
 
-        return render(request, 'list_transaksi_paket_koin.html', {"result" : result, "role" : role})
+        return render(request, 'list_transaksi_paket_koin.html', {"result" : resultNum, "role" : role})
 
     else:
         return HttpResponseRedirect('/login')

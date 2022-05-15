@@ -20,17 +20,17 @@
     {% include 'navbar.html' %}
     <table>
         <tr>
-        <!-- <th>No</th> -->
+        <th>No</th>
         <th>Paket Koin</th>
         <th>Harga</th>
         <th>Action</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
-            <!-- <th>{{ res }}</th> -->
-            <th>{{ res.Jumlah_Koin }}</th>
-            <th>{{ res.Harga }}</th>
+            <th>{{ no }}</th>
+            <th>{{ res.jumlah_koin }}</th>
+            <th>{{ res.harga }}</th>
             <th>
                 <button class="button">
                     <a href="/crud-paket-koin/update-paket-koin">Update</a>
@@ -49,17 +49,17 @@
 
     <table>
         <tr>
-        <!-- <th>No</th> -->
+        <th>No</th>
         <th>Paket Koin</th>
         <th>Harga</th>
         <th>Action</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
-            <!-- <th>{{ res }}</th> -->
-            <th>{{ res.Jumlah_Koin }}</th>
-            <th>{{ res.Harga }}</th>
+            <th>{{ no }}</th>
+            <th>{{ res.jumlah_koin }}</th>
+            <th>{{ res.harga }}</th>
             <th><button class="button">
                 <a href="/cr-transaksi-pembelian-koin/form-transaksi-paket-koin">Beli</a>
                 </button>

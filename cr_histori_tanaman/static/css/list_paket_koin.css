@@ -3,10 +3,6 @@ table, th, td, tr {
     font-size: medium;
     font-weight: normal;
 }
-
-table {
-    width: 100%;
-}
 /* 
 h1 {
     color: aquamarine;

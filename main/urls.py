@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile', views.loggedInView, name='view'),
     path('logout', views.logout, name='logout'),
     path('index', views.login, name='home'),
+    path('isi-lumbung', views.isiLumbung, name='isi-lumbung'),
 ]

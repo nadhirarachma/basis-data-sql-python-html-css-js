@@ -4,28 +4,24 @@ from django.db import connection
 from collections import namedtuple
 from .forms import *
 
-# Create your views here.
-
 def tupleFetch(cursor):
     desc = cursor.description
     nt_result = namedtuple('Result', [col[0] for col in desc])
     return [nt_result(*row) for row in cursor.fetchall()]
 
-def listPaketKoin(request):
+def listProduksi(request):
    if request.session.has_key('email'):
         cursor = connection.cursor()
         result = []
+        role =''
         try:
             cursor.execute("SET SEARCH_PATH TO HIDAY")
-            if (request.session['role'] == ['admin']):
-                # cursor.execute("SELECT * FROM ADMIN WHERE EMAIL = '"+ request.session['email'][0] +"'")
-                cursor.execute("SELECT * FROM PAKET_KOIN")
-                result = tupleFetch(cursor)
+            cursor.execute("SELECT PRO.nama AS nama, A.nama AS namaAset, durasi, jumlah_unit_hasil FROM PRODUKSI P JOIN ASET A ON P.Id_alat_produksi = A.id JOIN PRODUK PRO ON P.Id_produk_makanan = PRO.id")
+            result = tupleFetch(cursor)
+            if (request.session['role'] == ['admin']):        
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM PAKET_KOIN")
-                result = tupleFetch(cursor)
                 role = "pengguna"
 
         except Exception as e:
@@ -38,27 +34,42 @@ def listPaketKoin(request):
                 temp[i+1] = result[i]
             resultNum = list(temp.items())
 
-        return render(request, 'list_paket_koin.html', {"result" : resultNum, "role" : role})
+        return render(request, 'list_produksi.html', {"result" : resultNum, "role" : role})
 
    else:
         return HttpResponseRedirect('/login')
 
-def buatPaketKoin(request):
-    role = ''
-    
+def buatProduksi(request):
     if (request.session['role'] == ['admin']):
         role = "admin"
 
     else:
         role = "pengguna"
-    return render(request, 'create_paket_koin.html', {'form' : BuatPaketKoin, "role" : role})
-
-def updatePaketKoin(request):
-    role = ''
     
+    return render(request, 'buat_produksi.html', {"form" : BuatProduksi, "role" : role})
+
+def detailProduksi(request, pk):
+    cursor = connection.cursor()
+    result = []
+    cursor.execute("SET SEARCH_PATH TO HIDAY")
+    cursor.execute("SELECT * FROM PRODUKSI")
+    result = tupleFetch(cursor)
+    resultt = result[pk+1]
+
+    cursor.close()
+
+    temp = {}
+    for i in range(len(result)-1):
+        temp[i+1] = result[i]
+    resultNum = list(temp.items())
+    
+    return render(request, 'detail_produksi.html', {"res" : resultNum[pk]})
+
+def ubahProduksi(request):
     if (request.session['role'] == ['admin']):
         role = "admin"
 
     else:
         role = "pengguna"
-    return render(request, 'update_paket_koin.html', {'form' : UpdatePaketKoin, "role" : role})
+    
+    return render(request, 'ubah_produksi.html', {"form" : UbahProduksi, "role" : role})

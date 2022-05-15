@@ -26,4 +26,6 @@ urlpatterns = [
     path('cr-transaksi-upgrade-lumbung/', include('cr_transaksi_update_lumbung.urls')),
     path('cr-histori-tanaman/', include('cr_histori_tanaman.urls')),
 
+    path('crud-produksi/', include('crud_produksi.urls')),
+    path('cr-histori-pmakanan/', include('cr_histori_pmakanan.urls')),
 ]

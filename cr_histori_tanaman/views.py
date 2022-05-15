@@ -30,7 +30,7 @@ def listHistoriProduksiTanaman(request):
 
             else:
                 email = request.session['email'][0]
-                cursor.execute("SELECT HT.email, HT.waktu_awal :: time as Waktu_awal, Hp.waktu_selesai :: time as Waktu_selesai, HP.jumlah, HP.xp, A.nama FROM HISTORI_TANAMAN AS HT, HISTORI_PRODUKSI AS HP, BIBIT_TANAMAN AS BT, ASET AS A WHERE HT.email = HP.email AND HT.waktu_awal=HP.waktu_awal AND HT.id_bibit_tanaman =BT.id_aset AND BT.id_aset=A.id AND HT.Email='" + email + "'")
+                cursor.execute("SELECT HT.email, HT.waktu_awal :: time as Waktu_awal, Hp.waktu_selesai :: time as Waktu_selesai, HP.jumlah, HP.xp, A.nama FROM HISTORI_TANAMAN AS HT, HISTORI_PRODUKSI AS HP, BIBIT_TANAMAN AS BT, ASET AS A WHERE HT.email = HP.email AND HT.waktu_awal=HP.waktu_awal AND HT.id_bibit_tanaman =BT.id_aset AND BT.id_aset=A.id AND HT.email='" + email + "'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -39,8 +39,12 @@ def listHistoriProduksiTanaman(request):
         
         finally:
             cursor.close()
+            temp = {}
+            for i in range(len(result)):
+                temp[i+1] = result[i]
+            resultNum = list(temp.items())
 
-        return render(request, 'list_histori_produksi_tanaman.html', {"result" : result, "role" : role})
+        return render(request, 'list_histori_produksi_tanaman.html', {"result" : resultNum, "role" : role})
 
     else:
         return HttpResponseRedirect('/login')
