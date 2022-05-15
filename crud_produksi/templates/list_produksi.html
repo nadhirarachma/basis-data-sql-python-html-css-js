@@ -7,19 +7,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/list_produk.css' %}">
+  <link rel="stylesheet" href="{% static 'css/list_produksi.css' %}">
 
   <title>TK3-F04</title>
 </head>
 
 <body>
   
-    <h1>List Produk</h1>
+    <h1>List Produksi</h1>
 
     {% if role == 'admin' %}
     {% include 'navbar.html' %}
     <table>
         <tr>
+        <th>No</th>
         <th>Produk Makanan</th>
         <th>Alat Produksi</th>
         <th>Durasi Produksi</th>
@@ -27,13 +28,14 @@
         <th>Action</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
-            <th>{{ res.id_alat_produksi }}</th>
-            <th>{{ res.id_produk_makanan }}</th>
+            <th>{{ no }}</th>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.namaaset }}</th>
             <th>{{ res.durasi }}</th>
             <th>{{ res.jumlah_unit_hasil }}</th>
-            <th>Button</th>
+            <th><a href="{% url 'crud_produksi:detail-produksi'  pk=no %}">Detail</a> <br> <a href="{% url 'crud_produksi:ubah-produksi' %}">Update</a> <br> <a href="#">Delete</a> </th>
         </tr>
         {% endfor %}
     </table>
@@ -44,6 +46,7 @@
 
     <table>
         <tr>
+        <th>No</th>
         <th>Produk Makanan</th>
         <th>Alat Produksi</th>
         <th>Durasi Produksi</th>
@@ -51,13 +54,14 @@
         <th>Action</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
-            <th>{{ res.id_alat_produksi }}</th>
-            <th>{{ res.id_produk_makanan }}</th>
+            <th>{{ no }}</th>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.namaaset }}</th>
             <th>{{ res.durasi }}</th>
             <th>{{ res.jumlah_unit_hasil }}</th>
-            <th>Button</th>
+            <th><a href="{% url 'crud_produksi:detail-produksi'  pk=no %}">Detail</a> </th>
         </tr>
         {% endfor %}
     </table>
