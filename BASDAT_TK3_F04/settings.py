@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'crud_produk',
+    'cr_histori_hewan',
+    'crud_pesanan',
+    'cr_histori_penjualan'
 ]
 
 MIDDLEWARE = [
