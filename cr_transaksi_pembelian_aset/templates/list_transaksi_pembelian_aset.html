@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/list_transaksi_pembelian_aset.css' %}">
+
+        <title>TK3-F04</title>
+    </head>
+
+    <body>
+    
+        <h1>List Transaksi Pembelian Aset</h1>
+
+        {% if role == 'admin' %}
+        {% include 'navbar.html' %}
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>Email Pengguna</th>
+                <th>Waktu Pembelian</th>
+                <th>Jenis</th>
+                <th>Nama Aset</th>
+                <th>Jumlah</th>
+                <th>Total Harga</th>
+            </tr>
+
+            {% for no, res in result %}
+            <tr>
+                <th>{{ no }}.</th>
+                <th>{{ res.email }}</th>
+                <th>{{ res.waktu }}</th>
+                <th>{{ res.jenis_aset }}</th>
+                <th>{{ res.nama }}</th>
+                <th>{{ res.jumlah }}</th>
+                <th>{{ res.total_harga }}</th>
+            </tr>
+            {% endfor %}   
+        </table>
+        {% endif %}
+
+        {% if role == 'pengguna' %}
+        {% include 'navbar.html' %}
+
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>Waktu Pembelian</th>
+                <th>Jenis</th>
+                <th>Nama Aset</th>
+                <th>Jumlah</th>
+                <th>Total Harga</th>
+            </tr>
+
+            {% for no, res in result %}
+            <tr>
+                <th>{{ no }}.</th>
+                <th>{{ res.waktu }}</th>
+                <th>{{ res.jenis_aset }}</th>
+                <th>{{ res.nama }}</th>
+                <th>{{ res.jumlah }}</th>
+                <th>{{ res.total_harga }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </body>
+
+</html>
+
+
+

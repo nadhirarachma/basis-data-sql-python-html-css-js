@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/list_aset.css' %}">
+
+        <title>TK3-F04</title>
+    </head>
+
+    <body>
+    
+        <h1>List Aset</h1>
+
+        {% include 'navbar.html' %}
+        <div align='center'>
+            <form action="/crud-aset/list-dekorasi">
+                <input type="submit" value="Dekorasi" />
+            </form>  
+            <form action="/crud-aset/list-bibit-tanaman">
+                <input type="submit" value="Bibit Tanaman" />
+            </form>            
+            <form action="/crud-aset/list-kandang">
+                <input type="submit" value="Kandang" />
+            </form>  
+            <form action="/crud-aset/list-hewan">
+                <input type="submit" value="Hewan" />
+            </form>  
+            <form action="/crud-aset/list-alat-produksi">
+                <input type="submit" value="Alat Produksi" />
+            </form>  
+            <form action="/crud-aset/list-petak-sawah">
+                <input type="submit" value="Petak Sawah" />
+            </form>      
+        </div>
+    </body>
+
+</html>
+
+
+
