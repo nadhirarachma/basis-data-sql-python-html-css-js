@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/list_histori_hewan.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+
+    <h1>Detail Penjualan</h1>
+
+    {% include 'navbar.html' %}
+    
+    {% for res in result1 %}
+        <h2>Email Pengguna: {{res.email}}</h2>
+        <h2>Waktu Penjualan: {{res.waktu_penjualan}}</h2>
+    {% endfor %}
+    </br>
+    {% for res in result2 %}
+        <h2>ID Pesanan: {{res.id}}</h2>
+        <h2>Nama Pesanan: {{res.nama}}</h2>
+        <h2>Jenis Pesanan: {{res.jenis}}</h2>
+        <h2>Status Pesanan: {{res.status}}</h2>
+        <h2>Total Koin: {{res.total}}</h2>
+    {% endfor %}
+
+    <table>
+        <tr>
+        <th>Nama Produksi</th>
+        <th>Jumlah Produksi</th>
+        <th>Subtotal</th>
+        </tr>
+    
+        {% for res in result3 %}
+        <tr>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.jumlah }}</th>
+            <th>{{ res.subtotal }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>
+
+
+

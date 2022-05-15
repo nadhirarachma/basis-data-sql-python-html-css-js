@@ -16,11 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django import urls
+from cr_histori_hewan.views import list_histori_hewan, produksi_hewan
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('crud-produk/', include('crud_produk.urls')),
+    path('crud-pesanan/', include('crud_pesanan.urls')),
+    path('cr-histori-hewan/', include('cr_histori_hewan.urls')),
+    path('cr-histori-penjualan/', include('cr_histori_penjualan.urls')),
     path('crud-produksi/', include('crud_produksi.urls')),
     path('cr-histori-pmakanan/', include('cr_histori_pmakanan.urls')),
     path('crud-aset/', include('crud_aset.urls')),
