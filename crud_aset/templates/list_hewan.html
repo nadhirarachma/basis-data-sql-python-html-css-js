@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/list_aset.css' %}">
+
+        <title>TK3-F04</title>
+    </head>
+
+    <body>
+    
+        <h1>List Hewan</h1>
+
+        {% if role == 'admin' %}
+        {% include 'navbar.html' %}
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>ID Aset</th>
+                <th>Nama</th>
+                <th>Minimum Level</th>
+                <th>Harga Beli</th>
+                <th>Durasi Produksi</th>
+                <th>ID Kandang</th>
+                <th>Action</th>
+            </tr>
+
+            {% for no, res in result %}
+            <tr>
+                <th>{{ no }}.</th>
+                <th>{{ res.id_aset }}</th>
+                <th>{{ res.nama }}</th>
+                <th>{{ res.minimum_level }}</th>
+                <th>{{ res.harga_beli }}</th>
+                <th>{{ res.durasi_produksi }}</th>
+                <th>{{ res.id_kandang }}</th>
+                <th>
+                    <form action="/crud-aset/ubah-hewan">
+                        <input type="submit" value="Update" />
+                    </form> 
+                    <form action="">
+                        <input type="submit" value="Delete" />
+                    </form>  
+                </th>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+        {% if role == 'pengguna' %}
+        {% include 'navbar.html' %}
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>ID Aset</th>
+                <th>Nama</th>
+                <th>Minimum Level</th>
+                <th>Harga Beli</th>
+                <th>Durasi Produksi</th>
+                <th>ID Kandang</th>
+            </tr>
+
+            {% for no, res in result %}
+            <tr>
+                <th>{{ no }}.</th>
+                <th>{{ res.id_aset }}</th>
+                <th>{{ res.nama }}</th>
+                <th>{{ res.minimum_level }}</th>
+                <th>{{ res.harga_beli }}</th>
+                <th>{{ res.durasi_produksi }}</th>
+                <th>{{ res.id_kandang }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </body>
+
+</html>
+
+
+

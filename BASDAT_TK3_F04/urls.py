@@ -26,5 +26,8 @@ urlpatterns = [
     path('cr-histori-hewan/', include('cr_histori_hewan.urls')),
     path('cr-histori-penjualan/', include('cr_histori_penjualan.urls')),
     path('crud-produksi/', include('crud_produksi.urls')),
-    path('cr-histori-pmakanan/', include('cr_histori_pmakanan.urls'))
+    path('cr-histori-pmakanan/', include('cr_histori_pmakanan.urls')),
+    path('crud-aset/', include('crud_aset.urls')),
+    path('r-koleksi-aset/', include('r_koleksi_aset.urls')),
+    path('cr-transaksi-pembelian-aset/', include('cr_transaksi_pembelian_aset.urls')),
 ]

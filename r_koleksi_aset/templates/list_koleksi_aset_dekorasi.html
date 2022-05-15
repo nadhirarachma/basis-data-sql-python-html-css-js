@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/list_koleksi_aset.css' %}">
+
+        <title>TK3-F04</title>
+    </head>
+
+    <body>
+    
+        <h1>List Koleksi Aset Kategori Dekorasi</h1>
+
+        {% if role == 'admin' %}
+        {% include 'navbar.html' %}
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>Nama Aset</th>
+                <th>Email Pengguna</th>
+                <th>Minimum Level</th>
+                <th>Harga Beli</th>
+                <th>Jumlah</th>
+            </tr>
+
+            {% for no, res in result %}
+            <tr>
+                <th>{{ no }}.</th>
+                <th>{{ res.nama }}</th>
+                <th>{{ res.email }}</th>
+                <th>{{ res.minimum_level }}</th>
+                <th>{{ res.harga_beli }}</th>
+                <th>{{ res.jumlah }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+        {% if role == 'pengguna' %}
+        {% include 'navbar.html' %}
+
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>Nama Aset</th>
+                <th>Minimum Level</th>
+                <th>Harga Beli</th>
+                <th>Jumlah</th>
+            </tr>
+
+            {% for no, res in result %}
+            <tr>
+                <th>{{ no }}.</th>
+                <th>{{ res.nama }}</th>
+                <th>{{ res.minimum_level }}</th>
+                <th>{{ res.harga_beli }}</th>
+                <th>{{ res.jumlah }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </body>
+
+</html>
+
+
+

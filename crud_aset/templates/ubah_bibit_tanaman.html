@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_aset.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Update Aset Kategori Bibit Tanaman</h1>
+
+    {% include 'navbar.html' %}
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            <label for="id_Aset">ID</label>
+            </br>
+            <input type="text" class="form-control" placeholder="BTxxx" name="ID" disabled>
+            </br>
+            <label for="id_Nama">Nama</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Nama Bibit Tanaman" name="Nama" disabled>
+            </br>
+            <label for="id_MinimumLevel">Minimum Level</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Minimum Level" required>
+            </br>
+            <label for="id_HargaBeli">Harga Beli</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Harga Beli" required>
+            </br>
+            <label for="id_DurasiPanen">Durasi Panen</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Durasi Panen" required>
+            </br>
+            <div align='center'>
+                <button type='submit'>Simpan</button>      
+            </div>
+        </div
+        ><!-- notif blm diisi -->
+    </form>
+
+</body>
+
+</html>

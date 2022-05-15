@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_transaksi_pembelian_aset.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Buat Transaksi Pembelian Aset</h1>
+
+    {% include 'navbar.html' %}
+
+    <!-- <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Buat">
+    </form> -->
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            <label for="id_ID">Detail Aset</label>
+            </br>
+            <select id="id_ID" name="ID">
+                <option value="DK">Dekorasi - Pohon - 4</option>
+                <option value="BT">Bibit Tanaman - Padi - 1</option>
+                <option value="KD">Kandang - Kandang Ayam - 40</option>
+                <option value="HW">Hewan - Ayam - 20</option>
+                <option value="AP">Alat Produksi - Sugar mill - 100</option>
+                <option value="PS">Petak Sawah - Petak Sawah Padi - 2</option>
+            </select>
+            </br>
+            <label for="id_jumlah">Jumlah</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Jumlah" required>
+            </br>
+            <div align='center'>
+                <button type='submit'>Beli</button>      
+            </div>
+        </div> 
+        <!-- notif blm diisi blm -->
+    </form>
+
+</body>
+
+</html>
