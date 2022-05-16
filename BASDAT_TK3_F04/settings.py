@@ -62,8 +62,14 @@ INSTALLED_APPS = [
     'cr_transaksi_pembelian_koin',
     'cr_transaksi_update_lumbung',
     'cr_histori_tanaman',
+    'cr_histori_hewan',
+    'crud_pesanan',
+    'cr_histori_penjualan',
     'crud_produksi',
     'cr_histori_pmakanan',
+    'crud_aset',
+    'r_koleksi_aset',
+    'cr_transaksi_pembelian_aset',
 ]
 
 MIDDLEWARE = [

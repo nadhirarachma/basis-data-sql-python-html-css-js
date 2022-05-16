@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/list_histori_hewan.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+  
+    <h1>List Histori Hewan</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+    <table>
+        <tr>
+        <th>email</th>
+        <th>waktu_awal</th>
+        <th>waktu_selesai</th>
+        <th>jumlah</th>
+        <th>xp</th>
+        <th>nama</th>
+        </tr>
+
+        {% for res in result %}
+        <tr>
+            <th>{{ res.email }}</th>
+            <th>{{ res.waktu_awal }}</th>
+            <th>{{ res.waktu_selesai }}</th>
+            <th>{{ res.jumlah }}</th>
+            <th>{{ res.xp }}</th>
+            <th>{{ res.nama }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <table>
+        <tr>
+            <th>waktu_awal</th>
+            <th>waktu_selesai</th>
+            <th>jumlah</th>
+            <th>xp</th>
+            <th>nama</th>
+            </tr>
+    
+            {% for res in result %}
+            <tr>
+                <th>{{ res.waktu_awal }}</th>
+                <th>{{ res.waktu_selesai }}</th>
+                <th>{{ res.jumlah }}</th>
+                <th>{{ res.xp }}</th>
+                <th>{{ res.nama }}</th>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
+
+
+

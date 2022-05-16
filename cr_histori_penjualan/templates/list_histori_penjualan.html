@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/list_histori_hewan.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+  
+    <h1>List Histori Penjualan</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+    <table>
+        <tr>
+        <th>Email</th>
+        <th>Waktu Penjualan</th>
+        <th>ID Pesanan</th>
+        <th>Koin Diperoleh</th>
+        <th>XP Diperoleh</th>
+        <th>Action</th>
+        </tr>
+
+        {% for res in result %}
+        <tr>
+            <th>{{ res.email }}</th>
+            <th>{{ res.waktu_penjualan }}</th>
+            <th>{{ res.id_pesanan }}</th>
+            <th>{{ res.koin }}</th>
+            <th>{{ res.xp }}</th>
+            <th>
+                <a href="/cr-histori-penjualan/detail/{{res.id_pesanan}}">Detail</a>
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+    <table>
+        <tr>
+        <th>Waktu Penjualan</th>
+        <th>ID Pesanan</th>
+        <th>Koin Diperoleh</th>
+        <th>XP Diperoleh</th>
+        <th>Action</th>
+        </tr>
+
+        {% for res in result %}
+        <tr>
+            <th>{{ res.waktu_penjualan }}</th>
+            <th>{{ res.id_pesanan }}</th>
+            <th>{{ res.koin }}</th>
+            <th>{{ res.xp }}</th>
+            <th>
+                <a href="/cr-histori-penjualan/detail/{{res.id_pesanan}}">Detail</a>
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
+
+
+

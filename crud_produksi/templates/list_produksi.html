@@ -35,7 +35,7 @@
             <th>{{ res.namaaset }}</th>
             <th>{{ res.durasi }}</th>
             <th>{{ res.jumlah_unit_hasil }}</th>
-            <th><a href="{% url 'crud_produksi:detail-produksi'  pk=no %}">Detail</a> <br> <a href="{% url 'crud_produksi:ubah-produksi' %}">Update</a> <br> <a href="#">Delete</a> </th>
+            <th><a href="detail-produksi/{{ res.id }}">Detail</a> <br> <a href="{% url 'crud_produksi:ubah-produksi' %}">Update</a> <br> <a href="#">Delete</a> </th>
         </tr>
         {% endfor %}
     </table>
@@ -61,7 +61,7 @@
             <th>{{ res.namaaset }}</th>
             <th>{{ res.durasi }}</th>
             <th>{{ res.jumlah_unit_hasil }}</th>
-            <th><a href="{% url 'crud_produksi:detail-produksi'  pk=no %}">Detail</a> </th>
+            <th><a href="detail-produksi/{{ res.id }}">Detail</a> </th>
         </tr>
         {% endfor %}
     </table>

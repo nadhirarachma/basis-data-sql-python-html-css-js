@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django import urls
+from cr_histori_hewan.views import list_histori_hewan, produksi_hewan
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,7 +26,12 @@ urlpatterns = [
     path('cr-transaksi-pembelian-koin/', include('cr_transaksi_pembelian_koin.urls')),
     path('cr-transaksi-upgrade-lumbung/', include('cr_transaksi_update_lumbung.urls')),
     path('cr-histori-tanaman/', include('cr_histori_tanaman.urls')),
-
+    path('crud-pesanan/', include('crud_pesanan.urls')),
+    path('cr-histori-hewan/', include('cr_histori_hewan.urls')),
+    path('cr-histori-penjualan/', include('cr_histori_penjualan.urls')),
     path('crud-produksi/', include('crud_produksi.urls')),
     path('cr-histori-pmakanan/', include('cr_histori_pmakanan.urls')),
+    path('crud-aset/', include('crud_aset.urls')),
+    path('r-koleksi-aset/', include('r_koleksi_aset.urls')),
+    path('cr-transaksi-pembelian-aset/', include('cr_transaksi_pembelian_aset.urls')),
 ]
