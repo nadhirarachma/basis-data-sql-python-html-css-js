@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/list_paket_koin.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+    <h1>Update Paket Koin</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+
+    </form>
+    
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+    <h1>Tidak bisa membuka Form Paket Koin</h1>    
+    {% endif %}
+
+</body>
+
+</html>

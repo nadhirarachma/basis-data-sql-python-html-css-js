@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/list_paket_koin.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+  
+    <h1>List Transasksi Upgrade Lumbung</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+    <table>
+        <tr>
+        <th>No</th>
+        <th>Email Pengguna</th>
+        <th>Waktu Upgrade</th>        
+        </tr>
+
+        {% for no, res in result %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.email }}</th>
+            <th>{{ res.waktu }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <table>
+        <tr>
+        <th>No</th>
+        <th>Email Pengguna</th>
+        <th>Waktu Upgrade</th>       
+        </tr>
+
+        {% for no, res in result %}
+        <tr>
+            <th>{{ no }}</th>
+            <th>{{ res.email }}</th>
+            <th>{{ res.waktu }}</th>           
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
+
+
+
