@@ -15,8 +15,8 @@ def tupleFetch(cursor):
 def index(request):
     cursor = connection.cursor()
     try:
-        cursor.execute("SET SEARCH_PATH TO HIDAY")
-        cursor.execute("SELECT EMAIL FROM AKUN")
+        # cursor.execute("SET SEARCH_PATH TO HIDAY")
+        cursor.execute("SELECT hiday.EMAIL FROM AKUN")
         result = tupleFetch(cursor)
 
     except Exception as e:
@@ -88,14 +88,14 @@ def loggedInView(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT * FROM ADMIN WHERE EMAIL = '"+ request.session['email'][0] +"'")
+                cursor.execute("SELECT * FROM hiday.ADMIN WHERE EMAIL = '"+ request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM PENGGUNA WHERE EMAIL = '"+ request.session['email'][0] +"'")
+                cursor.execute("SELECT * FROM hiday.PENGGUNA WHERE EMAIL = '"+ request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -127,23 +127,23 @@ def isiLumbung(request):
         role =''
         try:
             if (request.session['role'] == ['admin']):
-                cursor.execute("SET SEARCH_PATH TO HIDAY")
-                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, PRODUK_MAKANAN PM WHERE  LM.id_produk = PR.id AND PR.id = PM.id_produk")
+                # cursor.execute("SET SEARCH_PATH TO HIDAY")
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM hiday.PRODUK PR, hiday.LUMBUNG_MEMILIKI_PRODUK LM, hiday.PRODUK_MAKANAN PM WHERE  LM.id_produk = PR.id AND PR.id = PM.id_produk")
                 result = tupleFetch(cursor)
-                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, HASIL_PANEN HP WHERE  LM.id_produk = PR.id AND PR.id = HP.id_produk")
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM hiday.PRODUK PR, hiday.LUMBUNG_MEMILIKI_PRODUK LM, hiday.HASIL_PANEN HP WHERE  LM.id_produk = PR.id AND PR.id = HP.id_produk")
                 result2 = tupleFetch(cursor)
-                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, PRODUK_HEWAN PH WHERE  LM.id_produk = PR.id AND PR.id = PH.id_produk")
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM hiday.PRODUK PR, hiday.LUMBUNG_MEMILIKI_PRODUK LM, hiday.PRODUK_HEWAN PH WHERE  LM.id_produk = PR.id AND PR.id = PH.id_produk")
                 result3 = tupleFetch(cursor)
                 role = "admin"
 
             else:
                 email = str(request.session['email'][0])
-                cursor.execute("SET SEARCH_PATH TO HIDAY")
-                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, PRODUK_MAKANAN PM WHERE LM.id_produk = PR.id AND PR.id = PM.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
+                # cursor.execute("SET SEARCH_PATH TO HIDAY")
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM hiday.PRODUK PR, hiday.LUMBUNG_MEMILIKI_PRODUK LM, hiday.PRODUK_MAKANAN PM WHERE LM.id_produk = PR.id AND PR.id = PM.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
                 result = tupleFetch(cursor)
-                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, HASIL_PANEN HP WHERE LM.id_produk = PR.id AND PR.id = HP.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM hiday.PRODUK PR, hiday.LUMBUNG_MEMILIKI_PRODUK LM, hiday.HASIL_PANEN HP WHERE LM.id_produk = PR.id AND PR.id = HP.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
                 result2 = tupleFetch(cursor)
-                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM PRODUK PR, LUMBUNG_MEMILIKI_PRODUK LM, PRODUK_HEWAN PH WHERE LM.id_produk = PR.id AND PR.id = PH.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
+                cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM hiday.PRODUK PR, hiday.LUMBUNG_MEMILIKI_PRODUK LM, hiday.PRODUK_HEWAN PH WHERE LM.id_produk = PR.id AND PR.id = PH.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
                 result3 = tupleFetch(cursor)
                 cursor.execute("SELECT *  FROM LUMBUNG L WHERE L.email = '" + ''.join(email) + "'")
                 result4 = tupleFetch(cursor)
