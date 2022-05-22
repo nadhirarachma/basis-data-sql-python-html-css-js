@@ -16,7 +16,7 @@ def index(request):
     cursor = connection.cursor()
     try:
         # cursor.execute("SET SEARCH_PATH TO HIDAY")
-        cursor.execute("SELECT hiday.EMAIL FROM AKUN")
+        cursor.execute("SELECT EMAIL FROM hiday.AKUN")
         result = tupleFetch(cursor)
 
     except Exception as e:
@@ -145,7 +145,7 @@ def isiLumbung(request):
                 result2 = tupleFetch(cursor)
                 cursor.execute("SELECT DISTINCT LM.id_lumbung, PR.id, PR.nama, PR.harga_jual, PR.sifat_produk, LM.jumlah FROM hiday.PRODUK PR, hiday.LUMBUNG_MEMILIKI_PRODUK LM, hiday.PRODUK_HEWAN PH WHERE LM.id_produk = PR.id AND PR.id = PH.id_produk AND LM.id_lumbung = '" + ''.join(email) + "'")
                 result3 = tupleFetch(cursor)
-                cursor.execute("SELECT *  FROM LUMBUNG L WHERE L.email = '" + ''.join(email) + "'")
+                cursor.execute("SELECT *  FROM hiday.LUMBUNG L WHERE L.email = '" + ''.join(email) + "'")
                 result4 = tupleFetch(cursor)
                 role = "pengguna"
 
