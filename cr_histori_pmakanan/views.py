@@ -15,16 +15,16 @@ def listHistori(request):
         result = []
         role =''
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             
             if (request.session['role'] == ['admin']):    
-                cursor.execute("SELECT HP.email, HP.waktu_awal, HP.waktu_selesai, HP.jumlah, HP.xp, P.nama as namaproduk, A.nama as asetalat from HISTORI_PRODUKSI HP JOIN HISTORI_PRODUKSI_MAKANAN HPM ON HP.email = HPM.email AND HP.waktu_awal = HPM.waktu_awal JOIN PRODUK P ON HPM.id_produk_makanan = P.id JOIN ASET A ON HPM.id_alat_produksi = A.id")
+                cursor.execute("SELECT HP.email, HP.waktu_awal, HP.waktu_selesai, HP.jumlah, HP.xp, P.nama as namaproduk, A.nama as asetalat from hiday.HISTORI_PRODUKSI HP JOIN hiday.HISTORI_PRODUKSI_MAKANAN HPM ON HP.email = HPM.email AND HP.waktu_awal = HPM.waktu_awal JOIN hiday.PRODUK P ON HPM.id_produk_makanan = P.id JOIN hiday.ASET A ON HPM.id_alat_produksi = A.id")
                 result = tupleFetch(cursor)    
                 role = "admin"
 
             else:
                 email = str(request.session['email'][0])
-                cursor.execute("SELECT HP.waktu_awal, HP.waktu_selesai, HP.jumlah, HP.xp, P.nama as namaproduk, A.nama as asetalat from HISTORI_PRODUKSI HP JOIN HISTORI_PRODUKSI_MAKANAN HPM ON HP.email = HPM.email AND HP.waktu_awal = HPM.waktu_awal JOIN PRODUK P ON HPM.id_produk_makanan = P.id JOIN ASET A ON HPM.id_alat_produksi = A.id AND HPM.email  = '" + ''.join(email) + "'")
+                cursor.execute("SELECT HP.waktu_awal, HP.waktu_selesai, HP.jumlah, HP.xp, P.nama as namaproduk, A.nama as asetalat from hiday.HISTORI_PRODUKSI HP JOIN hiday.HISTORI_PRODUKSI_MAKANAN HPM ON HP.email = HPM.email AND HP.waktu_awal = HPM.waktu_awal JOIN hiday.PRODUK P ON HPM.id_produk_makanan = P.id JOIN hiday.ASET A ON HPM.id_alat_produksi = A.id AND HPM.email  = '" + ''.join(email) + "'")
                 result = tupleFetch(cursor) 
                 role = "pengguna"
 

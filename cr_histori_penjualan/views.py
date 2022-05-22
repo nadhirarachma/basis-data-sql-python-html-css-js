@@ -16,14 +16,14 @@ def list_histori_penjualan(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT * FROM HISTORI_PENJUALAN;")
+                cursor.execute("SELECT * FROM hiday.HISTORI_PENJUALAN;")
                 result = tuple_fetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM HISTORI_PENJUALAN WHERE email = '"+ request.session['email'][0] +"'")
+                cursor.execute("SELECT * FROM hiday.HISTORI_PENJUALAN WHERE email = '"+ request.session['email'][0] +"'")
                 result = tuple_fetch(cursor)
                 role = "pengguna"
 
@@ -45,14 +45,14 @@ def view_detai_penjualan(request, id):
         result2 = []
         result3 = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
-            cursor.execute("SELECT email, waktu_penjualan FROM histori_penjualan WHERE id_pesanan = '" + id +"';")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
+            cursor.execute("SELECT email, waktu_penjualan FROM hiday.histori_penjualan WHERE id_pesanan = '" + id +"';")
             result1 = tuple_fetch(cursor)
 
-            cursor.execute("SELECT id, nama, jenis, total, status FROM pesanan WHERE id = '" + id +"';")
+            cursor.execute("SELECT id, nama, jenis, total, status FROM hiday.pesanan WHERE id = '" + id +"';")
             result2 = tuple_fetch(cursor)
 
-            cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM detail_pesanan dp JOIN produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
+            cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM hiday.detail_pesanan dp JOIN hiday.produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
             result3 = tuple_fetch(cursor)
 
         except Exception as e:

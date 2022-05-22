@@ -22,15 +22,15 @@ def listTransaksiLumbung(request):
         # role = ''
         
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):                
-                cursor.execute("SELECT * FROM TRANSAKSI_UPGRADE_LUMBUNG")
+                cursor.execute("SELECT * FROM hiday.TRANSAKSI_UPGRADE_LUMBUNG")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
                 email = request.session['email'][0]
-                cursor.execute("SELECT * FROM TRANSAKSI_UPGRADE_LUMBUNG WHERE email='" + email + "'")
+                cursor.execute("SELECT * FROM hiday.TRANSAKSI_UPGRADE_LUMBUNG WHERE email='" + email + "'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 

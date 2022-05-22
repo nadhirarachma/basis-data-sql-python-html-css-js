@@ -16,15 +16,15 @@ def list_histori_hewan(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 # cursor.execute("SELECT * FROM ADMIN WHERE EMAIL = '"+ request.session['email'][0] +"'")
-                cursor.execute("select hp.email, hp.waktu_awal, hp.waktu_selesai, hp.jumlah, hp.xp, a.nama from histori_produksi hp JOIN histori_hewan hh on hp.email = hh.email and hp.waktu_awal = hh.waktu_awal JOIN hewan h on hh.id_hewan = h.id_aset JOIN aset a on h.id_aset = a.id;")
+                cursor.execute("select hp.email, hp.waktu_awal, hp.waktu_selesai, hp.jumlah, hp.xp, a.nama from hiday.histori_produksi hp JOIN hiday.histori_hewan hh on hp.email = hh.email and hp.waktu_awal = hh.waktu_awal JOIN hiday.hewan h on hh.id_hewan = h.id_aset JOIN hiday.aset a on h.id_aset = a.id;")
                 result = tuple_fetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("select hp.waktu_awal, hp.waktu_selesai, hp.jumlah, hp.xp, a.nama from histori_produksi hp JOIN histori_hewan hh on hp.email = hh.email and hp.waktu_awal = hh.waktu_awal JOIN hewan h on hh.id_hewan = h.id_aset JOIN aset a on h.id_aset = a.id WHERE hh.email = '"+ request.session['email'][0] +"'")
+                cursor.execute("select hp.waktu_awal, hp.waktu_selesai, hp.jumlah, hp.xp, a.nama from hiday.histori_produksi hp JOIN hiday.histori_hewan hh on hp.email = hh.email and hp.waktu_awal = hh.waktu_awal JOIN hiday.hewan h on hh.id_hewan = h.id_aset JOIN hiday.aset a on h.id_aset = a.id WHERE hh.email = '"+ request.session['email'][0] +"'")
                 result = tuple_fetch(cursor)
                 role = "pengguna"
 

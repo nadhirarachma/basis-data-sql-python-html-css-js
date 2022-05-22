@@ -22,15 +22,15 @@ def listHistoriProduksiTanaman(request):
         role = ''
         
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):                
-                cursor.execute("SELECT * FROM TRANSAKSI_UPGRADE_LUMBUNG")
+                cursor.execute("SELECT * FROM hiday.TRANSAKSI_UPGRADE_LUMBUNG")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
                 email = request.session['email'][0]
-                cursor.execute("SELECT HT.email, HT.waktu_awal :: time as Waktu_awal, Hp.waktu_selesai :: time as Waktu_selesai, HP.jumlah, HP.xp, A.nama FROM HISTORI_TANAMAN AS HT, HISTORI_PRODUKSI AS HP, BIBIT_TANAMAN AS BT, ASET AS A WHERE HT.email = HP.email AND HT.waktu_awal=HP.waktu_awal AND HT.id_bibit_tanaman =BT.id_aset AND BT.id_aset=A.id AND HT.email='" + email + "'")
+                cursor.execute("SELECT HT.email, HT.waktu_awal :: time as Waktu_awal, Hp.waktu_selesai :: time as Waktu_selesai, HP.jumlah, HP.xp, A.nama FROM hiday.HISTORI_TANAMAN AS HT, hiday.HISTORI_PRODUKSI AS HP, hiday.BIBIT_TANAMAN AS BT, hiday.ASET AS A WHERE HT.email = HP.email AND HT.waktu_awal=HP.waktu_awal AND HT.id_bibit_tanaman =BT.id_aset AND BT.id_aset=A.id AND HT.email='" + email + "'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 

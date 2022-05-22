@@ -22,9 +22,9 @@ def listTransaksiPaketKoin(request):
         role = ''
         
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):                
-                cursor.execute("SELECT * FROM TRANSAKSI_PEMBELIAN_KOIN")
+                cursor.execute("SELECT * FROM hiday.TRANSAKSI_PEMBELIAN_KOIN")
                 result = tupleFetch(cursor)
                 role = "admin"
 
@@ -32,7 +32,7 @@ def listTransaksiPaketKoin(request):
             elif (request.session['role'] == ['pengguna']):
                 print("aaa") 
                 email = request.session['email'][0]
-                cursor.execute("SELECT * FROM TRANSAKSI_PEMBELIAN_KOIN WHERE email='" + email + "'")
+                cursor.execute("SELECT * FROM hiday.TRANSAKSI_PEMBELIAN_KOIN WHERE email='" + email + "'")
                 print("aaaI")
                 result = tupleFetch(cursor)
                 role = "pengguna"

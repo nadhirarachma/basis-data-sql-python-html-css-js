@@ -15,14 +15,14 @@ def listTransaksiPembelianAset(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT ID_Aset, email, waktu, jumlah, nama, harga_beli * jumlah as total_harga, CASE WHEN ID_Aset LIKE 'DK%' THEN 'Dekorasi' WHEN ID_Aset LIKE 'BT%' THEN 'Bibit Tanaman' WHEN ID_Aset LIKE 'KD%' THEN 'Kandang' WHEN ID_Aset LIKE 'HW%' THEN 'Hewan' WHEN ID_Aset LIKE 'AP%' THEN 'Alat Produksi' WHEN ID_Aset LIKE 'PS%' THEN 'Petak Sawah' END AS jenis_aset FROM TRANSAKSI_PEMBELIAN JOIN ASET ON ID_Aset=ID")
+                cursor.execute("SELECT ID_Aset, email, waktu, jumlah, nama, harga_beli * jumlah as total_harga, CASE WHEN ID_Aset LIKE 'DK%' THEN 'Dekorasi' WHEN ID_Aset LIKE 'BT%' THEN 'Bibit Tanaman' WHEN ID_Aset LIKE 'KD%' THEN 'Kandang' WHEN ID_Aset LIKE 'HW%' THEN 'Hewan' WHEN ID_Aset LIKE 'AP%' THEN 'Alat Produksi' WHEN ID_Aset LIKE 'PS%' THEN 'Petak Sawah' END AS jenis_aset FROM hiday.TRANSAKSI_PEMBELIAN JOIN hiday.ASET ON ID_Aset=ID")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT ID_Aset, waktu, jumlah, nama, harga_beli * jumlah as total_harga, CASE WHEN ID_Aset LIKE 'DK%' THEN 'Dekorasi' WHEN ID_Aset LIKE 'BT%' THEN 'Bibit Tanaman' WHEN ID_Aset LIKE 'KD%' THEN 'Kandang' WHEN ID_Aset LIKE 'HW%' THEN 'Hewan' WHEN ID_Aset LIKE 'AP%' THEN 'Alat Produksi' WHEN ID_Aset LIKE 'PS%' THEN 'Petak Sawah' END AS jenis_aset FROM TRANSAKSI_PEMBELIAN JOIN ASET ON ID_Aset=ID WHERE email= '" + request.session['email'][0] +"'")
+                cursor.execute("SELECT ID_Aset, waktu, jumlah, nama, harga_beli * jumlah as total_harga, CASE WHEN ID_Aset LIKE 'DK%' THEN 'Dekorasi' WHEN ID_Aset LIKE 'BT%' THEN 'Bibit Tanaman' WHEN ID_Aset LIKE 'KD%' THEN 'Kandang' WHEN ID_Aset LIKE 'HW%' THEN 'Hewan' WHEN ID_Aset LIKE 'AP%' THEN 'Alat Produksi' WHEN ID_Aset LIKE 'PS%' THEN 'Petak Sawah' END AS jenis_aset FROM hiday.TRANSAKSI_PEMBELIAN JOIN hiday.ASET ON ID_Aset=ID WHERE email= '" + request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 

@@ -16,14 +16,14 @@ def list_histori_pesanan(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT * FROM PESANAN;")
+                cursor.execute("SELECT * FROM hiday.PESANAN;")
                 result = tuple_fetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM PESANAN;")
+                cursor.execute("SELECT * FROM hiday.PESANAN;")
                 result = tuple_fetch(cursor)
                 role = "pengguna"
 
@@ -44,17 +44,17 @@ def view_detail_pesanan(request, id):
         result1 = []
         result2 = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
-            cursor.execute("SELECT id, nama, jenis, total, status FROM pesanan WHERE id = '" + id +"';")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
+            cursor.execute("SELECT id, nama, jenis, total, status FROM hiday.pesanan WHERE id = '" + id +"';")
             result1 = tuple_fetch(cursor)
 
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM detail_pesanan dp JOIN produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
+                cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM hiday.detail_pesanan dp JOIN hiday.produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
                 result2 = tuple_fetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM detail_pesanan dp JOIN produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
+                cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM hiday.detail_pesanan dp JOIN hiday.produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
                 result2 = tuple_fetch(cursor)
                 role = "pengguna"
 
@@ -84,17 +84,17 @@ def ubah_pesanan(request, id):
         result1 = []
         result2 = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
-            cursor.execute("SELECT id, nama, jenis, total, status FROM pesanan WHERE id = '" + id +"';")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
+            cursor.execute("SELECT id, nama, jenis, total, status FROM hiday.pesanan WHERE id = '" + id +"';")
             result1 = tuple_fetch(cursor)
 
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM detail_pesanan dp JOIN produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
+                cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM hiday.detail_pesanan dp JOIN hiday.produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
                 result2 = tuple_fetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM detail_pesanan dp JOIN produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
+                cursor.execute("SELECT p.nama, dp.jumlah, dp.subtotal FROM hiday.detail_pesanan dp JOIN hiday.produk p on dp.id_produk = p.id WHERE dp.id_pesanan = '" + id +"';")
                 result2 = tuple_fetch(cursor)
                 role = "pengguna"
 

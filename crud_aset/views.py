@@ -32,14 +32,14 @@ def listDekorasi(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT * FROM ASET JOIN DEKORASI ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET A JOIN hiday.DEKORASI D ON A.ID_Aset= D.ID")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM ASET JOIN DEKORASI ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET A JOIN hiday.DEKORASI D ON A.ID_Aset= D.ID")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -63,14 +63,14 @@ def listBibitTanaman(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT * FROM ASET JOIN BIBIT_TANAMAN ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET A JOIN hiday.BIBIT_TANAMAN BT ON A.ID_Aset= BT.ID")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM ASET JOIN BIBIT_TANAMAN ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET A JOIN hiday.BIBIT_TANAMAN BT ON A.ID_Aset= BT.ID")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -94,14 +94,14 @@ def listKandang(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT * FROM ASET JOIN KANDANG ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET A JOIN hiday.KANDANG K ON A.ID_Aset=K.ID")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM ASET JOIN KANDANG ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET A JOIN hiday.KANDANG K ON A.ID_Aset=K.ID")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -125,14 +125,14 @@ def listHewan(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT HEWAN.ID_Aset, nama, minimum_level, harga_beli, durasi_produksi, id_kandang FROM ASET JOIN HEWAN ON HEWAN.ID_Aset=ASET.ID JOIN KANDANG ON HEWAN.ID_Kandang=KANDANG.ID_Aset")
+                cursor.execute("SELECT HEWAN.ID_Aset, nama, minimum_level, harga_beli, durasi_produksi, id_kandang FROM hiday.ASET A JOIN hiday.HEWAN H ON H.ID_Aset=A.ID JOIN hiday.KANDANG K ON H.ID_Kandang=K.ID_Aset")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT HEWAN.ID_Aset, nama, minimum_level, harga_beli, durasi_produksi, id_kandang FROM ASET JOIN HEWAN ON HEWAN.ID_Aset=ASET.ID JOIN KANDANG ON HEWAN.ID_Kandang=KANDANG.ID_Aset")
+                cursor.execute("SELECT HEWAN.ID_Aset, nama, minimum_level, harga_beli, durasi_produksi, id_kandang FROM hiday.ASET A JOIN hiday.HEWAN H ON H.ID_Aset=A.ID JOIN hiday.KANDANG K ON H.ID_Kandang=K.ID_Aset")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -156,14 +156,14 @@ def listAlatProduksi(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT * FROM ASET JOIN ALAT_PRODUKSI ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET JOIN hiday.ALAT_PRODUKSI ON ID_Aset=ID")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM ASET JOIN ALAT_PRODUKSI ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET JOIN hiday.ALAT_PRODUKSI ON ID_Aset=ID")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -187,14 +187,14 @@ def listPetakSawah(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
-                cursor.execute("SELECT * FROM ASET JOIN PETAK_SAWAH ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET JOIN hiday.PETAK_SAWAH ON ID_Aset=ID")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM ASET JOIN PETAK_SAWAH ON ID_Aset=ID")
+                cursor.execute("SELECT * FROM hiday.ASET JOIN hiday.PETAK_SAWAH ON ID_Aset=ID")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 

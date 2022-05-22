@@ -16,8 +16,8 @@ def listProduksi(request):
         result = []
         role =''
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
-            cursor.execute("SELECT PRO.nama AS nama, A.nama AS namaAset, durasi, jumlah_unit_hasil, PRO.id FROM PRODUKSI P JOIN ASET A ON P.Id_alat_produksi = A.id JOIN PRODUK PRO ON P.Id_produk_makanan = PRO.id")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
+            cursor.execute("SELECT PRO.nama AS nama, A.nama AS namaAset, durasi, jumlah_unit_hasil, PRO.id FROM hiday.PRODUKSI P JOIN hiday.ASET A ON P.Id_alat_produksi = A.id JOIN hiday.PRODUK PRO ON P.Id_produk_makanan = PRO.id")
             result = tupleFetch(cursor)
             if (request.session['role'] == ['admin']):        
                 role = "admin"
@@ -53,13 +53,13 @@ def detailProduksi(request, slug):
     cursor = connection.cursor()
     result = []
     result2 = []
-    cursor.execute("SET SEARCH_PATH TO HIDAY")
-    cursor.execute("SELECT PRO.nama AS nama, A.nama AS namaAset, durasi, jumlah_unit_hasil, PRO.id FROM PRODUKSI P JOIN ASET A ON P.Id_alat_produksi = A.id JOIN PRODUK PRO ON P.Id_produk_makanan = PRO.id WHERE PRO.id = '" + ''.join(slug) + "'")
+    # cursor.execute("SET SEARCH_PATH TO HIDAY")
+    cursor.execute("SELECT PRO.nama AS nama, A.nama AS namaAset, durasi, jumlah_unit_hasil, PRO.id FROM hiday.PRODUKSI P JOIN hiday.ASET A ON P.Id_alat_produksi = A.id JOIN hiday.PRODUK PRO ON P.Id_produk_makanan = PRO.id WHERE PRO.id = '" + ''.join(slug) + "'")
     result = cursor.fetchone()
     id_produk = result[4]
     print(result[4])
 
-    cursor.execute("SELECT Id_produk_makanan, P.nama as Bahan, Jumlah FROM PRODUK_DIBUTUHKAN_OLEH_PRODUK_MAKANAN PD, PRODUK P WHERE PD.id_produk = P.id AND PD.id_produk_makanan = '" + ''.join(id_produk) + "'")
+    cursor.execute("SELECT Id_produk_makanan, P.nama as Bahan, Jumlah FROM hiday.PRODUK_DIBUTUHKAN_OLEH_PRODUK_MAKANAN PD, hiday.PRODUK P WHERE PD.id_produk = P.id AND PD.id_produk_makanan = '" + ''.join(id_produk) + "'")
     result2 = tupleFetch(cursor)
 
     cursor.close()

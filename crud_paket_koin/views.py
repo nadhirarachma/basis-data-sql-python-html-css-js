@@ -16,15 +16,15 @@ def listPaketKoin(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 # cursor.execute("SELECT * FROM ADMIN WHERE EMAIL = '"+ request.session['email'][0] +"'")
-                cursor.execute("SELECT * FROM PAKET_KOIN")
+                cursor.execute("SELECT * FROM hiday.PAKET_KOIN")
                 result = tupleFetch(cursor)
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM PAKET_KOIN")
+                cursor.execute("SELECT * FROM hiday.PAKET_KOIN")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
