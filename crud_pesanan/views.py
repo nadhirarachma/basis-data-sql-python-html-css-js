@@ -64,7 +64,7 @@ def view_detail_pesanan(request, id):
         finally:
             cursor.close()
 
-        return render(request, 'detaiL_pesanan.html', {"result1" : result1, "result2" : result2, "role" : role})
+        return render(request, 'detail_pesanan.html', {"result1" : result1, "result2" : result2, "role" : role})
 
     else:
         return HttpResponseRedirect('/login')
