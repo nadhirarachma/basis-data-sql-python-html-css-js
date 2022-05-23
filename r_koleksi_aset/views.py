@@ -30,7 +30,7 @@ def listKoleksiAsetDekorasi(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'DK%'")
                 result = tupleFetch(cursor)
@@ -61,7 +61,7 @@ def listKoleksiAsetBibitTanaman(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'BT%'")
                 result = tupleFetch(cursor)
@@ -92,7 +92,7 @@ def listKoleksiAsetKandang(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'KD%'")
                 result = tupleFetch(cursor)
@@ -123,7 +123,7 @@ def listKoleksiAsetHewan(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'HW%'")
                 result = tupleFetch(cursor)
@@ -154,7 +154,7 @@ def listKoleksiAsetAlatProduksi(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'AP%'")
                 result = tupleFetch(cursor)
@@ -185,7 +185,7 @@ def listKoleksiAsetPetakSawah(request):
         cursor = connection.cursor()
         result = []
         try:
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'PS%'")
                 result = tupleFetch(cursor)
