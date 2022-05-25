@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/buat_histori_makanan.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
   <title>TK3-F04</title>
 </head>
@@ -24,6 +25,10 @@
 
     {% if role == 'pengguna' %}
     {% include 'navbar.html' %}
+
+    {% if gagal == 'gagal' %}
+        <body onload = "return alertt()">
+    {% endif %}
 
     <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
         {% csrf_token %}
@@ -44,13 +49,13 @@
             
             <label for="id_XP">XP</label>
             </br>
-            <input type="number" class="form-control" placeholder="" name="XP" id="xp" disabled>
+            <input type="number" class="form-control" placeholder="" name="XP" id="xpp" disabled>
             </br>
 
             <div align='center'>
                 <button type='submit'>Buat</button>      
             </div>
-        </div> 
+        </div>
     </form>
 
     {% endif %}
@@ -59,7 +64,7 @@
 
 <script>
     function countXP() {
-        document.getElementById("xp").value = 5 * document.getElementById("jmlh").value;   
+        document.getElementById("xpp").value = 5 * document.getElementById("jmlh").value;
     }
 
     function validateForm() {
@@ -69,6 +74,10 @@
             return false;
         }
     } 
+
+    function alertt() {
+        alert('Anda tidak memiliki bahan yang cukup, silahkan menambahkan produk yang akan digunakan sebagai bahan terlebih dahulu');
+    }
 </script>
 
 </html>
