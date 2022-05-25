@@ -22,15 +22,11 @@
         <div class="container" align='center'>
             <label for="id_ID">Jenis Produk</label>
             </br>
-            <select id="id_ID" name="ID" disabled>
-                <option value="HP">Hasil Panen</option>
-                <option value="PH">Produk Hewan</option>
-                <option value="PM">Produk Makanan</option>
-            </select>
+            <input type="text" class="form-control" placeholder="Jenis Produk yang Dipilih" name="JenisProduk" value="{{ result.jenisproduk }}"disabled>
             </br>
             <label for="id_Nama">Nama</label>
             </br>
-            <input type="text" class="form-control" placeholder="Nama Produk yang Dipilih" name="Nama" disabled>
+            <input type="text" class="form-control" placeholder="Nama Produk yang Dipilih" name="Nama" value="{{ result.nama }}"disabled>
             </br>
             <label for="id_HargaJual">Harga Jual</label>
             </br>
