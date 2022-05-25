@@ -25,32 +25,26 @@
     {% if role == 'pengguna' %}
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
     <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="">ID Produk Makanan</label>
+            <label for="id_IdProduk">ID Produk Makanan</label>
             <br>
-            <select id="" name="ID">
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
+            <select id="id_IdProduk" name="IdProduk">
+                {% for res in result %}
+                    <option value="{{ res.id }}">{{ res.nama }}</option>
+                {% endfor %}
             </select>
             </br>
 
-            <label for="">Jumlah</label>
+            <label for="id_Jumlah">Jumlah</label>
             </br>
             <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" id="jmlh" onchange="countXP()">
             </br>
             
-            <label for="">XP</label>
+            <label for="id_XP">XP</label>
             </br>
-            <input type="number" class="form-control" placeholder="" name="" id="xp" disabled>
+            <input type="number" class="form-control" placeholder="" name="XP" id="xp" disabled>
             </br>
 
             <div align='center'>
@@ -65,7 +59,7 @@
 
 <script>
     function countXP() {
-            document.getElementById("xp").value = 5 * document.getElementById("jmlh").value;   
+        document.getElementById("xp").value = 5 * document.getElementById("jmlh").value;   
     }
 
     function validateForm() {
