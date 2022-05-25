@@ -2,7 +2,7 @@ from email.policy import default
 from django import forms
 
 class FormProduksiTanaman(forms.Form):
-    BibitTanaman = forms.CharField(label='Bibit Tanaman')
+    BibitTanaman = forms.CharField(label='BibitTanaman')
     Jumlah = forms.IntegerField(label='Jumlah')    
     XP = forms.IntegerField(label='XP')
     # CaraPembayaran = forms.CharField(label='Cara Pembayaran', max_length=50)

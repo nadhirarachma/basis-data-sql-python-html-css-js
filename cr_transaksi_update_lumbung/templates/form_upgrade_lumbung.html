@@ -14,15 +14,30 @@
 
 <body>
 
+  <h1>Form Upgrade Lumbung</h1>
     {% if role == 'pengguna' %}
     {% include 'navbar.html' %}
-    <h1>Form Paket Koin</h1>
+    
 
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Upgrade">
-
+    <form action="" method="post" name="form">
+      {% csrf_token %}
+      <div class="container" align="center">
+        <label for="id_PaketKoin">Level Lumbung</label>
+        </br>
+        <input type="number" class="form-control" name="level" value="{{ result.level }}" disabled>
+        </br>
+        <label for="id_Harga">Kapasitas Lumbung</label>
+        </br>
+        <input type="number" class="form-control" name="kapasitas_maksimal" value="{{ result.kapasitas_maksimal }}" disabled>
+        </br>
+        <label for="id_Harga">Biaya Upgrade</label>
+        </br>
+        <input type="number" class="form-control" name="Jumlah" value="200" disabled>
+        </br>
+        <div align="center">
+          <button type="submit">Beli</button>
+        </div>
+      </div>
     </form>
     
     {% endif %}

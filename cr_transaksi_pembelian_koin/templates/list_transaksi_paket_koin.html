@@ -48,8 +48,8 @@
 
     <table>
         <tr>
-        <!-- <th>No</th> -->
-        <th>Email Pengguna</th>
+        <th>No</th>
+        <!-- <th>Email Pengguna</th> -->
         <th>Waktu Pembelian</th>
         <th>Jumlah</th>
         <th>Cara Pembayaran</th>
@@ -57,10 +57,10 @@
         <th>Total Biaya</th>
         </tr>
 
-        {% for res in result %}
+        {% for no, res in result %}
         <tr>
-            <!-- <th>{{ res }}</th> -->
-            <th>{{ res.email }}</th>
+            <th>{{ no }}</th>
+            <!-- <th>{{ res.email }}</th> -->
             <th>{{ res.waktu }}</th>
             <th>{{ res.jumlah }}</th>
             <th>{{ res.cara_pembayaran }}</th>

@@ -1,3 +1,5 @@
+from ntpath import join
+from unittest import result
 from django.shortcuts import render
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.db import connection
@@ -45,20 +47,75 @@ def listPaketKoin(request):
 
 def buatPaketKoin(request):
     role = ''
-    
+    formBuatPaket = BuatPaketKoin(request.POST)
+  
     if (request.session['role'] == ['admin']):
         role = "admin"
 
     else:
         role = "pengguna"
+
+    if (formBuatPaket.is_valid() and request.method == 'POST'):
+        jumlahKoin = formBuatPaket.cleaned_data['JumlahKoin']
+        harga = formBuatPaket.cleaned_data['Harga']
+
+        try:
+            cursor = connection.cursor()
+            cursor.execute("INSERT INTO hiday.PAKET_KOIN VALUES("+ str(jumlahKoin) +"," + str(harga)+ ");")
+            
+        except Exception as e:
+            print(e)
+            cursor.close()
+
+        finally:
+            cursor.close()
+
+        return HttpResponseRedirect('/crud-paket-koin/list-paket-koin')
+
+    else:        
+        formBuatPaket = BuatPaketKoin()
+
     return render(request, 'create_paket_koin.html', {'form' : BuatPaketKoin, "role" : role})
 
-def updatePaketKoin(request):
-    role = ''
     
+
+def updatePaketKoin(request, slug):
+    print('iii')
     if (request.session['role'] == ['admin']):
         role = "admin"
+        # print('uuu')
+        form = UpdatePaketKoin(request.POST, request.FILES)
+        cursor = connection.cursor()
+        result = []
 
+        cursor.execute("SELECT * FROM hiday.PAKET_KOIN WHERE jumlah_koin="+ str(slug)+ ";")
+        result = cursor.fetchone()
+
+        print('aaa')
+
+        context = {
+            'jumlah_koin' : result[0],
+            'harga' : result[1]
+        }
+
+        if (form.is_valid and request.method == 'POST'):
+            # jumlahkoin = form.data.get('JumlahKoin')
+            harga = form.data.get('Harga')
+
+            try:
+                cursor.execute('UPDATE hiday.PAKET_KOIN SET harga='+ harga +'WHERE jumlah_koin ='+ "".join(slug)+';')
+            
+            except Exception as e:
+                print(e)
+                cursor.close()
+
+            finally:
+                cursor.close()
+            return HttpResponseRedirect('/crud-paket-koin/list-paket-koin')
+
+        return render(request, 'update_paket_koin.html', {'form' : UpdatePaketKoin, "role" : role, "result" : context})
+    
     else:
         role = "pengguna"
+
     return render(request, 'update_paket_koin.html', {'form' : UpdatePaketKoin, "role" : role})

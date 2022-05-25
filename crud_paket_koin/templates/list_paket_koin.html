@@ -32,12 +32,12 @@
             <th>{{ res.jumlah_koin }}</th>
             <th>{{ res.harga }}</th>
             <th>
-                <button class="button">
-                    <a href="/crud-paket-koin/update-paket-koin">Update</a>
-                </button>
-                <button class="button">
+                <!-- <button class="button"> -->
+                    <a href="update-paket-koin/{{ res.jumlah_koin }}">Update</a>
+                <!-- </button> -->
+                <!-- <button class="button"> -->
                     <a href="#">Delete</a>
-                </button>
+                <!-- </button> -->
             </th>
         </tr>
         {% endfor %}
@@ -60,9 +60,10 @@
             <th>{{ no }}</th>
             <th>{{ res.jumlah_koin }}</th>
             <th>{{ res.harga }}</th>
-            <th><button class="button">
-                <a href="/cr-transaksi-pembelian-koin/form-transaksi-paket-koin">Beli</a>
-                </button>
+            <th>
+                <!-- <button class="button"> -->
+                <a href="/cr-transaksi-pembelian-koin/form-transaksi-paket-koin/{{ res.jumlah_koin }}">Beli</a>
+                <!-- </button> -->
             </th>
         </tr>
         {% endfor %}
