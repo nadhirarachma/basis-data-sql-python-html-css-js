@@ -13,41 +13,36 @@
 </head>
 
 <body>
-    <h1>Form Buat Histori Hewan</h1>
+    <h1>Form Produksi Hewan</h1>
 
     {% if role == 'pengguna' %}
     {% include 'navbar.html' %}
-
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
+    
     <form action = "" method = "POST">
         {% csrf_token %}
         <div class="container" align='center'>
             <label for="">ID Hewan</label>
-            <select id="" name="ID">
+            <select id="nama_hewan" name="nama_hewan">
+                {% for res in result %}
+                <option value={{res.nama}}>{{res.nama}}</option>
+                {% endfor %}
             </select>
             </br>
             </br>
             <label for="">Jumlah</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="" required>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="jumlah" id="jumlah" value=0 min=0 required max=999>
             </br>
             </br>
             <label for="">XP</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="" required value="5" disabled>
+            <input type="text" class="form-control" name="xp" id="xp" required value="5 dikali jumlah produksi" disabled>
             </br>
             </br>
             <div align='center'>
                 <button type='submit'>Buat</button>      
             </div>
         </div> 
-        <!-- notif blm diisi blm -->
-        <!-- tambah bahan blm -->
     </form>
 
     {% endif %}

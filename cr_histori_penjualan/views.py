@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.db import connection
 from collections import namedtuple
-from .forms import *
+from datetime import datetime
 
 # Create your views here.
 
@@ -16,7 +16,6 @@ def list_histori_penjualan(request):
         cursor = connection.cursor()
         result = []
         try:
-            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM hiday.HISTORI_PENJUALAN;")
                 result = tuple_fetch(cursor)
@@ -38,14 +37,17 @@ def list_histori_penjualan(request):
     else:
         return HttpResponseRedirect('/login')
 
-def view_detai_penjualan(request, id):
+def view_detail_penjualan(request, id):
     if request.session.has_key('email'):
         cursor = connection.cursor()
         result1 = []
         result2 = []
         result3 = []
         try:
-            # cursor.execute("SET SEARCH_PATH TO HIDAY")
+            if (request.session['role'] == ['admin']):
+                role = "admin"
+            else:
+                role = "pengguna"
             cursor.execute("SELECT email, waktu_penjualan FROM hiday.histori_penjualan WHERE id_pesanan = '" + id +"';")
             result1 = tuple_fetch(cursor)
 
@@ -61,7 +63,29 @@ def view_detai_penjualan(request, id):
         finally:
             cursor.close()
 
-        return render(request, 'detaiL_penjualan.html', {"result1" : result1, "result2" : result2, "result3" : result3})
+        return render(request, 'detaiL_penjualan.html', {"result1" : result1, "result2" : result2, "result3" : result3, "role" : role})
+
+    else:
+        return HttpResponseRedirect('/login')
+
+def ambil_pesanan(request, id):
+    if request.session.has_key('email'):
+        cursor = connection.cursor()
+        selected_pesanan = []
+        try:
+            if (request.session['role'] == ['pengguna']):
+                cursor.execute("select id, total from hiday.pesanan where id = '" + id + "'")
+                selected_pesanan = tuple_fetch(cursor)
+                time_str = str(datetime.now())
+                cursor.execute("insert into hiday.histori_penjualan values('" + request.session['email'][0] + "', '" + time_str + "'::timestamp, '" + str(selected_pesanan[0][1]) + "', 10, '" + selected_pesanan[0][0] + "')")    
+
+        except Exception as e:
+            print(e)
+        
+        finally:
+            cursor.close()
+
+        return HttpResponseRedirect('/cr-histori-penjualan/list-histori-penjualan')
 
     else:
         return HttpResponseRedirect('/login')

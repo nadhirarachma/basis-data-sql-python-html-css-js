@@ -15,14 +15,7 @@
 <body>
     <h1>Form Ubah Pesanan</h1>
 
-    {% if role == 'admin' %}
     {% include 'navbar.html' %}
-
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
 
     <form action = "" method = "POST">
         {% csrf_token %}
@@ -30,27 +23,27 @@
             {% for res in result1 %}
                 <label for="">ID Pesanan</label>
                 </br>
-                <input type="text" class="form-control" placeholder="Harap diisi" name="" required value="{{res.id}}" disabled>
+                <input type="text" class="form-control" placeholder="Harap diisi" name="id_pesanan" id="id_pesanan" required value="{{res.id}}" disabled>
                 </br>
                 </br>
                 <label for="">Nama Pesanan</label>
                 </br>
-                <input type="text" class="form-control" placeholder="Harap diisi" name="" required value="{{res.nama}}">
+                <input type="text" class="form-control" placeholder="Harap diisi" name="nama_pesanan" id="nama_pesanan" required value="{{res.nama}}">
                 </br>
                 </br>
                 <label for="">Jenis Pesanan</label>
                 </br>
-                <input type="text" class="form-control" placeholder="Harap diisi" name="" required value="{{res.jenis}}">
+                <input type="text" class="form-control" placeholder="Harap diisi" name="jenis_pesanan" id="jenis_pesanan" required value="{{res.jenis}}">
                 </br>
                 </br>
                 <label for="">Status Pesanan</label>
                 </br>
-                <input type="text" class="form-control" placeholder="Harap diisi" name="" required value="{{res.status}}">
+                <input type="text" class="form-control" placeholder="Harap diisi" name="status_pesanan" id="status_pesanan" required value="{{res.status}}">
                 </br>
                 </br>
                 <label for="">Total Koin</label>
                 </br>
-                <input type="text" class="form-control" placeholder="Harap diisi" name="" required value="{{res.total}}" disabled>
+                <input type="text" class="form-control" placeholder="Harap diisi" name="total_koin" id="total_koin" required value="{{res.total}}" disabled>
                 </br>
                 </br>
             {% endfor %}
@@ -73,17 +66,7 @@
                 <button type='submit'>SIMPAN</button>      
             </div>
         </div> 
-        <!-- notif blm diisi blm -->
-        <!-- tambah bahan blm -->
     </form>
-
-    {% endif %}
-
-    {% if role == 'pengguna' %}
-    {% include 'navbar.html' %}
-
-    <h1>Pengguna tidak dapat membuat pesanan</h1>
-    {% endif %}
 
 </body>
 

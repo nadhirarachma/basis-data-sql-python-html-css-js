@@ -18,41 +18,44 @@
     {% if role == 'admin' %}
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
     <form action = "" method = "POST">
         {% csrf_token %}
         <div class="container" align='center'>
+            </br>
+            </br>
             <label for="">ID Pesanan</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="" required value="PSxxx" disabled>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="id_pesanan" id="id_pesanan" required value="{{id_new_pesanan}}" disabled>
             </br>
             </br>
             <label for="">Nama Pesanan</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="nama_pesanan" id="nama_pesanan" required>
             </br>
             </br>
             <label for="">Jenis Pesanan</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="jenis_pesanan" id="jenis_pesanan" required>
             </br>
             </br>
-            <label for="">Detail Pesanan</label>
-            <select id="" name="ID">
-            </select>
+            </br>
+            <label for=""><b>Detail Pesanan</b></label>
+            </br>
+            </br>
+            {% for i in list_produk %}
+            <label for="">{{ i.nama }}</label>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="{{ i.id }}" id="{{ i.id }}" value=0 min=0 max=999 required>
+            </br>
+            {% endfor %}
             </br>
             </br>
             <div align='center'>
                 <button type='submit'>Buat</button>      
             </div>
+            </br>
+            </br>
         </div> 
-        <!-- notif blm diisi blm -->
-        <!-- tambah bahan blm -->
+
     </form>
 
     {% endif %}
