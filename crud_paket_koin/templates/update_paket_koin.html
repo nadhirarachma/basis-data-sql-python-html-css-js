@@ -18,7 +18,7 @@
     {% include 'navbar.html' %}
     <h1>Update Paket Koin</h1>
 
-    <form action="" method="post" name="form">
+    <form action="" method="post" name="form" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align="center">
           <label for="id_JumlahKoin">Jumlah Koin</label>
@@ -37,5 +37,15 @@
     {% endif %}
 
 </body>
+
+<script>
+  function validateForm() {
+      var y = document.forms["form"]['Harga'].value;
+      if (y == "") {
+          alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+          return false;
+      }
+  } 
+</script>
 
 </html>

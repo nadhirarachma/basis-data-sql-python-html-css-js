@@ -7,3 +7,6 @@ class BuatPaketKoin(forms.Form):
 class UpdatePaketKoin(forms.Form):
     # JumlahKoin = forms.IntegerField(label='Jumlah')
     Harga = forms.IntegerField(label='Harga')
+
+class DeletePaketKoin(forms.Form):
+    JumlahKoin = forms.IntegerField(label='Jumlah')

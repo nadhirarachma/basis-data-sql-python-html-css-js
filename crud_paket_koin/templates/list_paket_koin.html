@@ -36,7 +36,23 @@
                     <a href="update-paket-koin/{{ res.jumlah_koin }}">Update</a>
                 <!-- </button> -->
                 <!-- <button class="button"> -->
-                    <a href="#">Delete</a>
+                    {% for cob in coba %}
+                    {% if res.jumlah_koin == cob %}
+                    <a href="delete-paket-koin/{{ res.jumlah_koin }}">Delete</a>
+
+                    <!-- <form action="" method="post" name="form">
+                        {% csrf_token %}
+                        <div class="container" align="center">
+                            </br>
+                            <input type="number" class="form-control" name="JumlahKoin" value="{{ res.jumlah_koin }}" disabled>
+                            </br>
+                            <div align="center">
+                            <button type="submit">Hapus</button>
+                            </div>
+                        </div>
+                    </form> -->
+                    {% endif %}
+                    {% endfor %}
                 <!-- </button> -->
             </th>
         </tr>
