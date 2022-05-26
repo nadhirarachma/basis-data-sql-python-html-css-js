@@ -3,7 +3,9 @@ table, th, td, tr {
     font-size: medium;
     font-weight: normal;
 }
-/* 
-h1 {
-    color: aquamarine;
-} */
+
+table {
+    width: 100%;
+}
+
+

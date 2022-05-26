@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/create_histori_hewan' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+
+  {% include 'navbar.html' %}
+
+  <h1>Produksi tidak bisa diproses!</h1>
+  <h2>Anda tidak memiliki hewan yang cukup, silahkan membeli hewan terlebih dahulu</h2>
+
+  <div align='center'>
+    <a href="/cr-histori-hewan/produksi-hewan">Kembali</a>   
+</div>
+
+</body>
+
+</html>

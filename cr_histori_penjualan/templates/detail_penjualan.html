@@ -4,30 +4,32 @@
 
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/list_histori_hewan.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/list_histori_makanan.css' %}">
 
   <title>TK3-F04</title>
 </head>
 
 <body>
-
+    
     <h1>Detail Penjualan</h1>
 
     {% include 'navbar.html' %}
     
     {% for res in result1 %}
-        <h2>Email Pengguna: {{res.email}}</h2>
+        {% if role == 'admin' %}
+        <h2>Email Pengguna : {{res.email}}</h2>
+        {% endif %}
         <h2>Waktu Penjualan: {{res.waktu_penjualan}}</h2>
     {% endfor %}
-    </br>
     {% for res in result2 %}
-        <h2>ID Pesanan: {{res.id}}</h2>
-        <h2>Nama Pesanan: {{res.nama}}</h2>
-        <h2>Jenis Pesanan: {{res.jenis}}</h2>
-        <h2>Status Pesanan: {{res.status}}</h2>
-        <h2>Total Koin: {{res.total}}</h2>
+        <h2>ID Pesanan &emsp;&emsp;&ensp;: {{res.id}}</h2>
+        <h2>Nama Pesanan&emsp;: {{res.nama}}</h2>
+        <h2>Jenis Pesanan &ensp; : {{res.jenis}}</h2>
+        <h2>Status Pesanan : {{res.status}}</h2>
+        <h2>Total Koin &emsp;&emsp;&emsp;: {{res.total}}</h2>
     {% endfor %}
 
     <table>

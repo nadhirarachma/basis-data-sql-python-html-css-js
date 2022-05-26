@@ -4,16 +4,17 @@
 
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/list_histori_hewan.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/list_histori_makanan.css' %}">
 
   <title>TK3-F04</title>
 </head>
 
 <body>
   
-    <h1>List Histori Pesanan</h1>
+    <h1>List Pesanan</h1>
 
     {% if role == 'admin' %}
     {% include 'navbar.html' %}
@@ -37,14 +38,27 @@
             <th>
                 <a href="/crud-pesanan/detail/{{res.id}}">Detail</a>
                 </br>
-                {% if res.status != 'Selesai' %}
                 <a href="/crud-pesanan/update/{{res.id}}">Update</a>
-                {% endif %}
                 </br>
                 <a href="/crud-pesanan/delete/{{res.id}}">Delete</a>
             </th>
         </tr>
         {% endfor %}
+
+        {% for res in result2 %}
+        <tr>
+            <th>{{ res.id }}</th>
+            <th>{{ res.status }}</th>
+            <th>{{ res.jenis }}</th>
+            <th>{{ res.nama }}</th>
+            <th>{{ res.total }}</th>
+            <th>
+                <a href="/crud-pesanan/detail/{{res.id}}">Detail</a>
+            </th>
+        </tr>
+        {% endfor %}
+
+
     </table>
     {% endif %}
 
@@ -61,7 +75,7 @@
         <th>Action</th>
         </tr>
     
-        {% for res in result %}
+        {% for res in result0 %}
         <tr>
             <th>{{ res.id }}</th>
             <th>{{ res.status }}</th>
