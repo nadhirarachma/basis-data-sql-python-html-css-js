@@ -6,5 +6,5 @@ app_name = 'cr_histori_pmakanan'
 
 urlpatterns = [
     path('list-histori-pmakanan', views.listHistori, name='list-produksi'),
-    path('buat-histori-pmakanan', views.buatProduk, name='buat-produksi'),
+    path('buat-histori-pmakanan', views.buatProduksi, name='buat-produksi'),
     ]

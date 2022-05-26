@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/list_paket_koin.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Delete Paket Koin</h1>
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <h2>Anda Yakin Ingin Menghapus Paket Koin?</h2>
+    
+
+    <form action="" method="post" name="form">
+        {% csrf_token %}
+        <div class="container" align="center">
+          <label for="id_JumlahKoin">Jumlah Koin</label>
+          </br>
+            <input type="number" class="form-control" name="JumlahKoin" value="{{ result.jumlah_koin }}" disabled>
+            </br>
+            <div align="center">
+                <button type="submit">Delete</button>
+                <a href="/crud-paket-koin/list-paket-koin">Cancel</a>
+            </div>
+        </div>
+    </form>
+          
+    {% endif %}
+
+</body>
+
+</html>

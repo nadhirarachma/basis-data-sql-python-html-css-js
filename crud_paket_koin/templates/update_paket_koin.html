@@ -18,20 +18,34 @@
     {% include 'navbar.html' %}
     <h1>Update Paket Koin</h1>
 
-    <form action="" method="post">
+    <form action="" method="post" name="form" onsubmit = "return validateForm()">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
-
-    </form>
-    
-    {% endif %}
-
-    {% if role == 'pengguna' %}
-    {% include 'navbar.html' %}
-    <h1>Tidak bisa membuka Form Paket Koin</h1>    
+        <div class="container" align="center">
+          <label for="id_JumlahKoin">Jumlah Koin</label>
+          </br>
+          <input type="number" class="form-control" name="JumlahKoin" value="{{ result.jumlah_koin }}" disabled>
+          </br>
+          <label for="id_Harga">Harga</label>
+          </br>
+          <input type="number" class="form-control" placeholder="Masukkan Harga" name="Harga">
+          </br>
+          <div align="center">
+            <button type="submit">Simpan</button>
+          </div>
+        </div>
+    </form>    
     {% endif %}
 
 </body>
+
+<script>
+  function validateForm() {
+      var y = document.forms["form"]['Harga'].value;
+      if (y == "") {
+          alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+          return false;
+      }
+  } 
+</script>
 
 </html>

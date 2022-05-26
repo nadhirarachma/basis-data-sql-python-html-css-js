@@ -19,7 +19,7 @@
     <form action = "" method = "POST">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="id_Aset">ID</label>
+            <!-- <label for="id_Aset">ID</label>
             </br>
             <input type="text" class="form-control" placeholder="HWxxx" name="ID" disabled>
             </br>
@@ -38,12 +38,42 @@
             <label for="id_DurasiProduksi">Durasi Produksi</label>
             </br>
             <input type="text" class="form-control" placeholder="Harap diisi" name="Durasi Produksi" required>
+            </br> -->
+            </br>
+            <div class="form-group">
+                <label>ID:</label>
+                {{ form.ID }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Nama:</label>
+                {{ form.Nama }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Minimum Level:</label>
+                {{ form.MinimumLevel }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Harga Beli:</label>
+                {{ form.HargaBeli }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Durasi Produksi:</label>
+                {{ form.DurasiProduksi }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>ID Kandang:</label>
+                {{ form.IDKandang }}
+            </div>
             </br>
             <div align='center'>
                 <button type='submit'>Simpan</button>      
             </div>
-        </div
-        ><!-- notif blm diisi -->
+        </div>
     </form>
 
 </body>

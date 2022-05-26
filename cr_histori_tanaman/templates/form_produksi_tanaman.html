@@ -13,25 +13,56 @@
 </head>
 
 <body>
-
+    <h1>Form Produksi Tanaman</h1>
     {% if role == 'pengguna' %}
     {% include 'navbar.html' %}
-    <h1>Form Produksi Tanaman</h1>
-
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Produksi">
-
-    </form>
     
-    {% endif %}
 
-    {% if role == 'admin' %}
-    {% include 'navbar.html' %}
-    <h1>Tidak bisa membuka Form Transaksi Paket Koin</h1>    
+    <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
+      {% csrf_token %}
+      <div class="container" align='center'>
+        <label for="id_IdProduk">Bibit Tanaman</label>
+        <br>
+        <select id="id_IdProduk" name="IdProduk">
+            {% for i in result %}
+              <option value="{{ i.id }}">{{ i.nama }}</option>
+            {% endfor %}
+        </select>
+        </br>
+
+        <label for="id_Jumlah">Jumlah</label>
+        </br>
+        <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" id="jmlh" onchange="countXP()">
+        </br>
+        
+        <label for="id_XP">XP</label>
+        </br>
+        <input type="number" class="form-control" name="XP" id="xp" disabled>
+        </br>
+
+        <div align='center'>
+            <button type='submit'>Buat</button>      
+        </div>
+      </div> 
+    </form>
+
     {% endif %}
 
 </body>
 
+<script>
+  function countXP() {
+      document.getElementById("xp").value = 5 * document.getElementById("jmlh").value;   
+  }
+
+  function validateForm() {
+      var y = document.forms["form"]['Jumlah'].value;
+      if (y == "") {
+          alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+          return false;
+      }
+  } 
+</script>
+
 </html>
+

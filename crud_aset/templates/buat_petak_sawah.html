@@ -16,16 +16,10 @@
 
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
     <form action = "" method = "POST">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="id_Aset">ID</label>
+            <!-- <label for="id_Aset">ID</label>
             </br>
             <input type="text" class="form-control" placeholder="PSxxx" name="ID" disabled>
             </br>
@@ -42,20 +36,39 @@
             <input type="text" class="form-control" placeholder="Harap diisi" name="Harga Beli" required>
             </br>
             <label for="id_JenisTanaman">Jenis Tanaman</label>
+            </br> -->
             </br>
-            <select id="id_ID_Tanaman" name="Jenis Tanaman">
-                <option value="PD">Padi</option>
-                <option value="JG">Jagung</option>
-                <option value="TB">Tebu</option>
-                <option value="WT">Wortel</option>
-                <option value="SB">Stroberi</option>
+            <div class="form-group">
+                <label>ID:</label>
+                {{ form.ID }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Nama:</label>
+                {{ form.Nama }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Minimum Level:</label>
+                {{ form.MinimumLevel }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Harga Beli:</label>
+                {{ form.HargaBeli }}
+            </div>
+            </br>
+            <label for="id_JenisTanaman">Jenis Tanaman:</label>
+            <select id="id_JenisTanaman" name="JenisTanaman">
+                {% for jenis in JenisTanaman %}
+                <option>{{ jenis.0 }}</option>
+                {% endfor %}
             </select>
             </br>
             <div align='center'>
                 <button type='submit'>Tambahkan</button>      
             </div>
         </div> 
-        <!-- notif blm diisi -->
     </form>
 
 </body>

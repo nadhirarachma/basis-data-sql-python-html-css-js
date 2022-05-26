@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/buat_histori_makanan.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
   <title>TK3-F04</title>
 </head>
@@ -25,38 +26,36 @@
     {% if role == 'pengguna' %}
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
+    {% if gagal == 'gagal' %}
+        <body onload = "return alertt()">
+    {% endif %}
 
     <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="">ID Produk Makanan</label>
+            <label for="id_IdProduk">ID Produk Makanan</label>
             <br>
-            <select id="" name="ID">
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
+            <select id="id_IdProduk" name="IdProduk">
+                {% for res in result %}
+                    <option value="{{ res.id }}">{{ res.nama }}</option>
+                {% endfor %}
             </select>
             </br>
 
-            <label for="">Jumlah</label>
+            <label for="id_Jumlah">Jumlah</label>
             </br>
             <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" id="jmlh" onchange="countXP()">
             </br>
             
-            <label for="">XP</label>
+            <label for="id_XP">XP</label>
             </br>
-            <input type="number" class="form-control" placeholder="" name="" id="xp" disabled>
+            <input type="number" class="form-control" placeholder="" name="XP" id="xpp" disabled>
             </br>
 
             <div align='center'>
                 <button type='submit'>Buat</button>      
             </div>
-        </div> 
+        </div>
     </form>
 
     {% endif %}
@@ -65,7 +64,7 @@
 
 <script>
     function countXP() {
-            document.getElementById("xp").value = 5 * document.getElementById("jmlh").value;   
+        document.getElementById("xpp").value = 5 * document.getElementById("jmlh").value;
     }
 
     function validateForm() {
@@ -75,6 +74,10 @@
             return false;
         }
     } 
+
+    function alertt() {
+        alert('Anda tidak memiliki bahan yang cukup, silahkan menambahkan produk yang akan digunakan sebagai bahan terlebih dahulu');
+    }
 </script>
 
 </html>

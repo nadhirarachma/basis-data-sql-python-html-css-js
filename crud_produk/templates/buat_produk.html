@@ -18,18 +18,12 @@
     {% if role == 'admin' %}
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
     <form name="form" action = "" method = "POST" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="id_ID">Jenis Produk</label>
+            <label for="id_IdProduk">Jenis Produk</label>
             </br>
-            <select id="id_ID" name="ID">
+            <select id="id_ID" name="IdProduk">
                 <option value="HP">Hasil Panen</option>
                 <option value="PH">Produk Hewan</option>
                 <option value="PM">Produk Makanan</option>
@@ -41,7 +35,8 @@
             </br>
             <label for="id_HargaJual">Harga Jual</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="HargaJual" >
+            <input type="number" class="form-control" placeholder="Harap diisi" name="HargaJual">
+            <p id="alert"></p>
             </br>
             <label for="id_SifatProduk">Sifat Produk</label>
             </br>
@@ -71,7 +66,7 @@
         if (x == "" || y == "" || z == "") {
             alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
             return false;
-        }
+        } 
     } 
 </script>
 

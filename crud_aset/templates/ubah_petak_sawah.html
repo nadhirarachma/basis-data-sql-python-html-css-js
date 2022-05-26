@@ -19,7 +19,7 @@
     <form action = "" method = "POST">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="id_Aset">ID</label>
+            <!-- <label for="id_Aset">ID</label>
             </br>
             <input type="text" class="form-control" placeholder="PSxxx" name="ID" disabled>
             </br>
@@ -44,12 +44,39 @@
                 <option value="WT">Wortel</option>
                 <option value="SB">Stroberi</option>
             </select>
+            </br> -->
+            </br>
+            <div class="form-group">
+                <label>ID:</label>
+                {{ form.ID }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Nama:</label>
+                {{ form.Nama }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Minimum Level:</label>
+                {{ form.MinimumLevel }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Harga Beli:</label>
+                {{ form.HargaBeli }}
+            </div>
+            </br>
+            <label for="id_JenisTanaman">Jenis Tanaman:</label>
+            <select id="id_JenisTanaman" name="JenisTanaman">
+                {% for jenis in JenisTanaman %}
+                <option>{{ jenis.0 }}</option>
+                {% endfor %}
+            </select>
             </br>
             <div align='center'>
                 <button type='submit'>Simpan</button>      
             </div>
-        </div
-        ><!-- notif blm diisi -->
+        </div>
     </form>
 
 </body>

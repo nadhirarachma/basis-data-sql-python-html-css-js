@@ -1,9 +1,11 @@
+from pickle import NONE
 from django.shortcuts import render
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.db import connection
 from collections import namedtuple
 from .forms import *
 from main.forms import LoginForm
+import datetime
 
 # Create your views here.
 
@@ -50,12 +52,76 @@ def listTransaksiLumbung(request):
         return HttpResponseRedirect('/login')
 
 def formUpgradeLumbung(request):
-    role = ''
+    if (request.session['role'] == ['pengguna']):
+        role = "pengguna"
+        # print('uuu')
+        # form = FormPaketKoin(request.POST, request.FILES)
+        cursor = connection.cursor()
+        result = []
+        email = request.session['email'][0]
+
+        cursor.execute("SELECT *  FROM hiday.LUMBUNG WHERE email = '" + ''.join(email) + "'")
+        result = cursor.fetchone()
+
+        # print('aaa')
+        if (result == None):
+            level_lumbung = 1
+            kapasitas_lumbung = 50
+        
+        else:
+            context = {
+                'level' : result[1],
+                'kapasitas_maksimal' : result[2],
+            }
+
+            level_lumbung = int(context['level']) + 1
+            kapasitas_lumbung = int(context['kapasitas_maksimal']) + 50
+
+        context = {
+            'level' : level_lumbung,
+            'kapasitas_maksimal' : kapasitas_lumbung
+        }
+
+        if (request.method == 'POST'):
+
+            email = request.session['email'][0]
+            dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+
+            try:
+                
+                cursor.execute("SELECT * FROM hiday.PENGGUNA WHERE email = '" + ''.join(email) + "'")
+                resultt = cursor.fetchone()
+                contextt = {
+                    'koin' : resultt[4]
+                }
+
+                koinPengguna = int(contextt['koin'])
+
+                if(koinPengguna >= 200) :
+                    print('bisa')
+                    cursor.execute("UPDATE hiday.LUMBUNG SET level="+ str(level_lumbung) +", kapasitas_maksimal ="+ str(kapasitas_lumbung)+" WHERE email = '" + ''.join(email) + "';")
+                    cursor.execute("INSERT INTO hiday.TRANSAKSI_UPGRADE_LUMBUNG VALUES('"+str(email)+"', '"+dt+"');")
+                
+                elif (koinPengguna < 200):
+                    print("gk cukup")
+                    return HttpResponseNotFound("Koin anda tidak cukup, silahkan cari Koin terlebih dahulu")
+
+            
+            except Exception as e:
+                print('gak bisa')
+                print(e)
+                cursor.close()
+
+            finally:
+                cursor.close()
+            return HttpResponseRedirect('/cr-transaksi-upgrade-lumbung/list-transaksi-lumbung')
+
+        
+        return render(request, 'form_upgrade_lumbung.html', {"role" : role, "result" : context})
     
-    if (request.session['role'] == ['admin']):
+    else:
         role = "admin"
 
-    else:
-        role = "pengguna"
-    return render(request, 'form_upgrade_lumbung.html', {'form' : FormUpgradeLumbung, "role" : role})
+    return render(request, 'form_upgrade_lumbung.html', { "role" : role, "result" : context})
 

@@ -18,20 +18,48 @@
     {% include 'navbar.html' %}
     <h1>Form Paket Koin</h1>
 
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Beli">
-
+    <form action="" method="post" name="form" onsubmit = "return validateForm()">
+      {% csrf_token %}
+      <div class="container" align="center">
+        <label for="id_PaketKoin">Paket Koin</label>
+        </br>
+        <input type="number" class="form-control" name="Paketkoin" value="{{ result.jumlah_koin }}" disabled>
+        </br>
+        <label for="id_Harga">Harga</label>
+        </br>
+        <input type="number" class="form-control" name="Harga" value="{{ result.harga }}" disabled>
+        </br>
+        <label for="id_Harga">Jumlah</label>
+        </br>
+        <input type="number" class="form-control" placeholder="Masukkan Jumlah" name="Jumlah">
+        </br>
+        <label for="id_Jumlah">Cara Pembayaran</label>
+        </br>
+        <input type="text" class="form-control" placeholder="Metode Pembayaran" name="CaraPembayaran">
+        </br>
+        <div align="center">
+          <button type="submit">Beli</button>
+        </div>
+      </div>
     </form>
     
     {% endif %}
 
-    {% if role == 'admin' %}
-    {% include 'navbar.html' %}
-    <h1>Tidak bisa membuka Form Transaksi Paket Koin</h1>    
-    {% endif %}
-
 </body>
+
+<script>
+  function validateForm() {
+      var y = document.forms["form"]['Jumlah'].value;
+      var x = document.forms["form"]['CaraPembayaran'].value;
+      if (y == "") {
+          alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+          return false;
+      }
+      if (x == "") {
+          alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+          return false;
+      }
+  } 
+</script>
 
 </html>
