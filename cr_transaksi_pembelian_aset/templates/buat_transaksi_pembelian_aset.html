@@ -16,37 +16,38 @@
 
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
-    <form action = "" method = "POST">
+    <form name="form" action = "" method = "POST" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="id_ID">Detail Aset</label>
             </br>
-            <select id="id_ID" name="ID">
-                <option value="DK">Dekorasi - Pohon - 4</option>
-                <option value="BT">Bibit Tanaman - Padi - 1</option>
-                <option value="KD">Kandang - Kandang Ayam - 40</option>
-                <option value="HW">Hewan - Ayam - 20</option>
-                <option value="AP">Alat Produksi - Sugar mill - 100</option>
-                <option value="PS">Petak Sawah - Petak Sawah Padi - 2</option>
+            <label for="id_detail_aset">Detail Aset:</label>
+            <select id="id_detail_aset" name="id_detail_aset">
+                {% for detail in DetailAset %}
+                <option>{{ detail.4 }} - {{ detail.1 }} - {{ detail.2 }}</option>
+                {% endfor %}
             </select>
             </br>
-            <label for="id_jumlah">Jumlah</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Jumlah" required>
+            <div class="form-group">
+                <label for="id_Jumlah">Jumlah:</label>
+                <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" id="jmlh">
+            </div>
             </br>
             <div align='center'>
                 <button type='submit'>Beli</button>      
             </div>
         </div> 
-        <!-- notif blm diisi blm -->
     </form>
 
 </body>
+
+<script>
+    function validateForm() {
+        var y = document.forms["form"]['Jumlah'].value;
+        if (y == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+</script>
 
 </html>

@@ -16,16 +16,10 @@
 
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
     <form action = "" method = "POST">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="id_Aset">ID</label>
+            <!-- <label for="id_Aset">ID</label>
             </br>
             <input type="text" class="form-control" placeholder="APxxx" name="ID" disabled>
             </br>
@@ -43,13 +37,37 @@
             </br>
             <label for="id_KapasitasMaks">Kapasitas Maks</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Kapasitas Maks" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Kapasitas Maks" required> -->
+            </br>
+            <div class="form-group">
+                <label>ID:</label>
+                {{ form.ID }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Nama:</label>
+                {{ form.Nama }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Minimum Level:</label>
+                {{ form.MinimumLevel }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Harga Beli:</label>
+                {{ form.HargaBeli }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Kapasitas Maks:</label>
+                {{ form.KapasitasMaks }}
+            </div>
             </br>
             <div align='center'>
                 <button type='submit'>Tambahkan</button>      
             </div>
         </div> 
-        <!-- notif blm diisi -->
     </form>
 
 </body>
