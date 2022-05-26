@@ -1,3 +1,4 @@
+from pickle import NONE
 from django.shortcuts import render
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.db import connection
@@ -63,14 +64,18 @@ def formUpgradeLumbung(request):
         result = cursor.fetchone()
 
         # print('aaa')
+        if (result == None):
+            level_lumbung = 1
+            kapasitas_lumbung = 50
+        
+        else:
+            context = {
+                'level' : result[1],
+                'kapasitas_maksimal' : result[2],
+            }
 
-        context = {
-            'level' : result[1],
-            'kapasitas_maksimal' : result[2],
-        }
-
-        level_lumbung = int(context['level']) + 1
-        kapasitas_lumbung = int(context['kapasitas_maksimal']) + 50
+            level_lumbung = int(context['level']) + 1
+            kapasitas_lumbung = int(context['kapasitas_maksimal']) + 50
 
         context = {
             'level' : level_lumbung,
