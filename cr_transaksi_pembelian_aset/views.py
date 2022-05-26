@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.db import connection
 from collections import namedtuple
 from .forms import *
+from datetime import datetime
 
 def tupleFetch(cursor):
     desc = cursor.description
@@ -42,10 +43,60 @@ def listTransaksiPembelianAset(request):
         return HttpResponseRedirect('/login')
 
 def buatTransaksiPembelianAset(request):
-    if (request.session['role'] == ['admin']):
-        role = "admin"
+    if request.session.has_key('email'):
+        cursor = connection.cursor()
+        response = {}
+        email =  request.session['email'][0]
+        waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            if (request.session['role'] == ['pengguna']):
+                role = "pengguna"
+                cursor.execute("SELECT ID, nama, harga_beli, minimum_level, CASE WHEN ID LIKE 'DK%' THEN 'Dekorasi' WHEN ID LIKE 'BT%' THEN 'Bibit Tanaman' WHEN ID LIKE 'KD%' THEN 'Kandang' WHEN ID LIKE 'HW%' THEN 'Hewan' WHEN ID LIKE 'AP%' THEN 'Alat Produksi' WHEN ID LIKE 'PS%' THEN 'Petak Sawah' END AS jenis_aset FROM HIDAY.ASET ORDER BY ID")
+                response["DetailAset"] = cursor.fetchall()
+                response["form"] = BuatTransaksiPembelianAset
+                response["role"] = role
 
-    else:
-        role = "pengguna"
+                if (request.method == "POST"):
+                    form = BuatTransaksiPembelianAset(request.POST or None)
+                    if form.is_valid():
+                        detail_aset = request.POST['id_detail_aset']
+                        jumlah = request.POST['Jumlah']
+                        nama = detail_aset.split(" - ")[1]
+
+                        cursor.execute("SELECT ID FROM hiday.ASET WHERE nama= '" + nama +"'")
+                        result = tupleFetch(cursor)
+                        ID = result[0][0]
+                        
+                        cursor.execute("INSERT INTO HIDAY.TRANSAKSI_PEMBELIAN VALUES(%s, %s, %s, %s)", [email, waktu, jumlah, ID])
+
+                        return redirect("/cr-transaksi-pembelian-aset/list-transaksi-pembelian-aset")
+                    else:
+                        return redirect("/cr-transaksi-pembelian-aset/buat-transaksi-pembelian-aset")
+
+            else:
+                role = "admin"
+
+        except Exception as e:
+            print(e)
+        
+        finally:
+            cursor.close()
+
+        return render(request, 'buat_transaksi_pembelian_aset.html', response)
+
+
     
-    return render(request, 'buat_transaksi_pembelian_aset.html', {"form" : BuatTransaksiPembelianAset, "role" : role})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
