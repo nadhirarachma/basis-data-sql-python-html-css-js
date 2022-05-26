@@ -1,3 +1,4 @@
+from traceback import print_tb
 from django.shortcuts import render
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.db import connection
@@ -13,27 +14,83 @@ def listProduk(request):
    if request.session.has_key('email'):
         cursor = connection.cursor()
         result = []
+        resultt = []
+
         try:
             # cursor.execute("SET SEARCH_PATH TO HIDAY")
-            cursor.execute("SELECT id, nama, harga_jual, sifat_produk, CASE WHEN id LIKE '%HP%' THEN 'Hasil Panen' WHEN id LIKE '%PH%' THEN 'Produk Hewan' WHEN id LIKE '%PM%' THEN 'Produk Makanan' END AS jenisproduk FROM hiday.PRODUK")
-            result = tupleFetch(cursor)
             if (request.session['role'] == ['admin']):
                 role = "admin"
 
+                # print(result)   
+                cursor.execute("SELECT id_produk FROM hiday.DETAIL_PESANAN")
+                resultt = tupleFetch(cursor)
+
+                cursor.execute("SELECT id_produk FROM hiday.LUMBUNG_MEMILIKI_PRODUK")
+                resultt.append(tupleFetch(cursor))
+
+                cursor.execute("SELECT id_produk_hewan FROM hiday.HEWAN_MENGHASILKAN_PRODUK_HEWAN")
+                resultt.append(tupleFetch(cursor))
+
+                cursor.execute("SELECT id_hasil_panen FROM hiday.BIBIT_TANAMAN_MENGHASILKAN_HASIL_PANEN")
+                resultt.append(tupleFetch(cursor))
+
+                # print(resultt)
+
+                # dataAdmin = namedtuple('ResultAdmin',result)
+
+                idGabisaDelete = []
+                for i in range(len(resultt)):
+                    # print(resultt[i][0])
+                    idGabisaDelete.append(resultt[i][0])
+                    # temp[i+1] = result[i]
+                
+                # print(idGabisaDelete)
+
+                # resultAdmin = []
+
+                cursor.execute("SELECT id, nama, harga_jual, sifat_produk, CASE WHEN id LIKE '%HP%' THEN 'Hasil Panen' WHEN id LIKE '%PH%' THEN 'Produk Hewan' WHEN id LIKE '%PM%' THEN 'Produk Makanan' END AS jenisproduk FROM hiday.PRODUK")
+                # result = tupleFetch(cursor)
+                desc = cursor.description
+                nt_result = []
+                for col in desc:
+                    nt_result.append(col[0])
+                # nt_result = namedtuple('Result', [col[0] for col in desc])
+                nt_result.append("canDelete")
+
+                resultAdmin = namedtuple('ResultAdmin',nt_result)
+
+                result = []
+                for row in cursor.fetchall():
+                    if row[0] in idGabisaDelete:
+                        result.append(resultAdmin(row[0],row[1],row[2],row[3],row[4],'False'))
+                    else:
+                        result.append(resultAdmin(row[0],row[1],row[2],row[3],row[4],'True'))
+
+                print(result)
+
+                temp = {}
+                for i in range(len(result)):
+                    temp[i+1] = result[i]
+                    resultNum = list(temp.items())
+
+                return render(request, 'list_produk.html', {"result" : resultNum, "role" : role})
+
             else:
                 role = "pengguna"
+                cursor.execute("SELECT id, nama, harga_jual, sifat_produk, CASE WHEN id LIKE '%HP%' THEN 'Hasil Panen' WHEN id LIKE '%PH%' THEN 'Produk Hewan' WHEN id LIKE '%PM%' THEN 'Produk Makanan' END AS jenisproduk FROM hiday.PRODUK")
+                result = tupleFetch(cursor)
+                temp = {}
+                for i in range(len(result)):
+                    temp[i+1] = result[i]
+                    resultNum = list(temp.items())
+                
+                return render(request, 'list_produk.html', {"result" : resultNum, "role" : role})
 
         except Exception as e:
             print(e)
         
         finally:
             cursor.close()
-            temp = {}
-            for i in range(len(result)):
-                temp[i+1] = result[i]
-            resultNum = list(temp.items())
-
-        return render(request, 'list_produk.html', {"result" : resultNum, "role" : role})
 
    else:
         return HttpResponseRedirect('/login')
@@ -134,3 +191,16 @@ def ubahProduk(request, slug):
         role = "pengguna"
     
     return render(request, 'ubah_produk.html', {"form" : UbahProduk, "role" : role})
+
+def deleteProduk(request, slug):
+    if (request.session['role'] == ['admin']):
+        role = "admin"
+        cursor = connection.cursor()
+        cursor.execute("SET SEARCH_PATH TO HIDAY")
+        cursor.execute("DELETE FROM PRODUK WHERE id = '" + ''.join(slug) + "'")
+        cursor.execute("SET SEARCH_PATH TO public")
+        cursor.close()
+    else:
+        role = "pengguna"
+    
+    return HttpResponseRedirect('/crud-produk/list-produk')

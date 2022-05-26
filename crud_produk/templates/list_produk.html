@@ -35,7 +35,11 @@
             <th>{{ res.nama }}</th>
             <th>{{ res.harga_jual }}</th>
             <th>{{ res.sifat_produk }}</th>
-            <th><a href="ubah-produk/{{ res.id }}">Update</a> <br> <a href="#">Delete</a> </th>
+            <th><a href="ubah-produk/{{ res.id }}">Update</a> <br>
+            {% if res.canDelete == 'True' %}
+                <a href="delete-produk/{{ res.id }}">Delete</a>
+            {% endif %}
+            </th>
         </tr>
         {% endfor %}
     </table>
