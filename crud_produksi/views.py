@@ -19,7 +19,7 @@ def listProduksi(request):
             # cursor.execute("SET SEARCH_PATH TO HIDAY")
             cursor.execute("SELECT PRO.nama AS nama, A.nama AS namaAset, durasi, jumlah_unit_hasil, PRO.id FROM hiday.PRODUKSI P JOIN hiday.ASET A ON P.Id_alat_produksi = A.id JOIN hiday.PRODUK PRO ON P.Id_produk_makanan = PRO.id")
             result = tupleFetch(cursor)
-            if (request.session['role'] == ['admin']):        
+            if (request.session['role'] == ['admin']):
                 role = "admin"
 
             else:

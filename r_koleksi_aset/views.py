@@ -37,7 +37,7 @@ def listKoleksiAsetDekorasi(request):
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'DK%'")
+                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'DK%' AND email= '" + request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -68,7 +68,7 @@ def listKoleksiAsetBibitTanaman(request):
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'BT%'")
+                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'BT%' AND email= '" + request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -99,7 +99,7 @@ def listKoleksiAsetKandang(request):
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'KD%'")
+                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'KD%' AND email= '" + request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -130,7 +130,7 @@ def listKoleksiAsetHewan(request):
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'HW%'")
+                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'HW%' AND email= '" + request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -161,7 +161,7 @@ def listKoleksiAsetAlatProduksi(request):
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'AP%'")
+                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'AP%' AND email= '" + request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 
@@ -192,7 +192,7 @@ def listKoleksiAsetPetakSawah(request):
                 role = "admin"
 
             else:
-                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'PS%'")
+                cursor.execute("SELECT * FROM HIDAY.KOLEKSI_ASET_MEMILIKI_ASET JOIN HIDAY.ASET ON ID_Aset=ID JOIN HIDAY.KOLEKSI_ASET ON ID_Koleksi_Aset=Email WHERE ID_Aset LIKE 'PS%' AND email= '" + request.session['email'][0] +"'")
                 result = tupleFetch(cursor)
                 role = "pengguna"
 

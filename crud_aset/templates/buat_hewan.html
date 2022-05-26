@@ -16,16 +16,14 @@
 
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
+    {% if status_kandang == 'unavailable' %}
+    <body onload = "return alertt()">
+    {% endif %}
 
     <form action = "" method = "POST">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="id_Aset">ID</label>
+            <!-- <label for="id_Aset">ID</label>
             </br>
             <input type="text" class="form-control" placeholder="HWxxx" name="ID" disabled>
             </br>
@@ -43,15 +41,46 @@
             </br>
             <label for="id_DurasiProduksi">Durasi Produksi</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Durasi Produksi" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Durasi Produksi" required> -->
+            </br>
+            <div class="form-group">
+                <label>ID:</label>
+                {{ form.ID }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Nama:</label>
+                {{ form.Nama }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Minimum Level:</label>
+                {{ form.MinimumLevel }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Harga Beli:</label>
+                {{ form.HargaBeli }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Durasi Produksi:</label>
+                {{ form.DurasiProduksi }}
+            </div>
             </br>
             <div align='center'>
                 <button type='submit'>Tambahkan</button>         
             </div>
         </div> 
-        <!-- notif blm diisi -->
     </form>
 
 </body>
+
+<script>
+    function alertt() {
+        alert("Data untuk kandang hewan tersebut belum ada, silahkan membuat kandang terlebih dahulu");
+        return false;
+    }
+</script>
 
 </html>

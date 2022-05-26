@@ -37,12 +37,19 @@
                 <th>{{ res.harga_beli }}</th>
                 <th>{{ res.durasi_panen }}</th>
                 <th>
-                    <form action="/crud-aset/ubah-bibit-tanaman">
+                    <form action="{% url 'crud_aset:ubah-bibit-tanaman' key=res.id %}">
                         <input type="submit" value="Update" />
                     </form> 
-                    <form action="">
-                        <input type="submit" value="Delete" />
-                    </form>  
+
+                    {% for res2 in result2 %}
+                        {% for res3 in result3 %}
+                            {% if res.id == res2.id and res.id == res3.id_aset %}
+                            <form action="{% url 'crud_aset:hapus-aset' key=res.id %}">
+                                <input type="submit" value="Delete" />
+                            </form>  
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                 </th>
             </tr>
             {% endfor %}

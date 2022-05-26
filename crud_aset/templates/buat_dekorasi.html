@@ -16,20 +16,15 @@
 
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
-    <form action = "" method = "POST">
+    <form name="form" action = "{% url 'crud_aset:buat-dekorasi' %}" method = "POST">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="id_Aset">ID</label>
-            </br>
-            <input type="text" class="form-control" placeholder="DKxxx" name="ID" disabled>
-            </br>
-            <label for="id_Nama">Nama</label>
+            <!-- </br> -->
+            <!-- <label for="id_Aset">ID:</label>
+            {{ID}} -->
+            <!-- </br>
+            <input type="text" class="form-control" placeholder="DKxxx" name="ID" disabled> -->
+            <!-- <label for="id_Nama">Nama</label>
             </br>
             <input type="text" class="form-control" placeholder="Harap diisi" name="Nama" required>
             </br>
@@ -43,15 +38,40 @@
             </br>
             <label for="id_HargaJual">Harga Jual</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Harga Jual" required>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Harga Jual" required> -->
+            </br>
+            <div class="form-group">
+                <label>ID:</label>
+                {{ form.ID }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Nama:</label>
+                {{ form.Nama }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Minimum Level:</label>
+                {{ form.MinimumLevel }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Harga Beli:</label>
+                {{ form.HargaBeli }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Harga Jual:</label>
+                {{ form.HargaJual }}
+            </div>
             </br>
             <div align='center'>
                 <button type='submit'>Tambahkan</button>      
             </div>
         </div> 
-        <!-- notif blm diisi -->
     </form>
 
 </body>
+
 
 </html>
