@@ -1,4 +1,4 @@
-from turtle import st
+# from turtle import st
 from django.shortcuts import render
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.db import connection
