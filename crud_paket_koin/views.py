@@ -19,6 +19,7 @@ def listPaketKoin(request):
         cursor = connection.cursor()
         result = []
         bisaDelete = []
+        coba = []
 
         try:
             if (request.session['role'] == ['admin']):

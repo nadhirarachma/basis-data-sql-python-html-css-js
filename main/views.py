@@ -10,19 +10,100 @@ def tupleFetch(cursor):
     return [nt_result(*row) for row in cursor.fetchall()]
 
 def index(request):
-    cursor = connection.cursor()
-    try:
-        # cursor.execute("SET SEARCH_PATH TO HIDAY")
-        cursor.execute("SELECT EMAIL FROM hiday.AKUN")
-        result = tupleFetch(cursor)
 
-    except Exception as e:
-        print(e)
+    return render(request, 'main/home.html')
 
-    finally:
-        cursor.close()
+def registrasi(request):
 
-    return render(request, 'main/home.html', {'result': result})
+    return render(request, 'registrasi.html')
+
+def registrasiPengguna(request):
+    result = []
+    form = PenggunaForm(request.POST)
+
+    if (form.is_valid() and request.method == 'POST'):
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
+        namaAreaPertanian = form.cleaned_data['namaAreaPertanian']
+
+        try:
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM hiday.AKUN WHERE email ='" + str(email) + "'")
+            result = cursor.fetchone()
+
+            if(result == None): 
+                cursor.execute("INSERT INTO hiday.AKUN VALUES('"+ str(email) +"');")
+                cursor.execute("INSERT INTO hiday.PENGGUNA VALUES('"+ str(email) +"', '"+ str(password)+ "', '"+ str(namaAreaPertanian)+"');")
+                
+                role = "pengguna"
+                cursor.execute("SELECT * FROM hiday.PENGGUNA WHERE Email ='" + email + "' AND Password = '" + password + "'")
+                # result = cursor.fetchone()
+
+                if (cursor.fetchone()):
+                    cursor.execute("SET SEARCH_PATH TO public")
+                    request.session['email'] = [email, password, result]
+                    request.session['role'] = [role]
+
+            else:
+                return HttpResponseNotFound("Ditolak! User Sudah Terdaftar")
+            
+        except Exception as e:
+            print(e)
+            cursor.close()
+
+        finally:
+            cursor.close()
+
+        return HttpResponseRedirect('/profile')
+
+    else:
+        form = PenggunaForm()
+
+    return render(request, 'registrasi_pengguna.html',{'form' : form})
+
+def registrasiAdmin(request):
+    result = []
+    form = AdminForm(request.POST)
+
+    if (form.is_valid() and request.method == 'POST'):
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
+
+        try:
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM hiday.AKUN WHERE email ='" + str(email) + "'")
+            result = cursor.fetchone()
+
+            if(result == None): 
+                cursor.execute("INSERT INTO hiday.AKUN VALUES('"+ str(email) +"');")
+                cursor.execute("INSERT INTO hiday.ADMIN VALUES('"+ str(email) +"', '"+ str(password)+"');")
+                
+                role = "admin"
+                cursor.execute("SELECT * FROM hiday.ADMIN WHERE Email ='" + email + "' AND Password = '" + password + "'")
+                # result = cursor.fetchone()
+
+                if (cursor.fetchone()):
+                    cursor.execute("SET SEARCH_PATH TO public")
+                    request.session['email'] = [email, password, result]
+                    request.session['role'] = [role]
+
+            else:
+                return HttpResponseNotFound("Ditolak! User Sudah Terdaftar")
+            
+        except Exception as e:
+            print(e)
+            cursor.close()
+
+        finally:
+            cursor.close()
+
+        return HttpResponseRedirect('/profile')
+
+    else:
+        form = AdminForm()
+
+    return render(request, 'registrasi_admin.html',{'form' : form})
+
 
 def login(request):
     result = []

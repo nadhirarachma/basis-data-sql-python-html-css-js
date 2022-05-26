@@ -79,12 +79,12 @@ def formProduksiTanaman(request):
             jumlah_bibit_int = int(jumlah_bibit[0])
             print(jumlah_bibit_int)
 
-            xp = 5*jumlah_bibit_int
+            xp = 5*jumlah_produksi_int
             
             if (jumlah_produksi_int <= jumlah_bibit_int):
                 try:
                     print('bisa')
-                    cursor.execute("INSERT INTO hiday.HISTORI_PRODUKSI VALUES('"+str(email)+"', '"+str(dt)+"' , '"+ str(dt) +"' , "+str(jumlah_bibit_int)+" , "+ str(xp)+");")
+                    cursor.execute("INSERT INTO hiday.HISTORI_PRODUKSI VALUES('"+str(email)+"', '"+str(dt)+"' , '"+ str(dt) +"' , "+str(jumlah_produksi_int)+" , "+ str(xp)+");")
                     cursor.execute("INSERT INTO hiday.HISTORI_TANAMAN VALUES('"+str(email)+"', '"+str(dt)+"' , '"+ str(id_bibit)+"' );")
             
                 except Exception as e:

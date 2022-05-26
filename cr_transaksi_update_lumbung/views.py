@@ -84,9 +84,24 @@ def formUpgradeLumbung(request):
             
 
             try:
-                print('bisa')
-                cursor.execute("UPDATE hiday.LUMBUNG SET level="+ str(level_lumbung) +", kapasitas_maksimal ="+ str(kapasitas_lumbung)+" WHERE email = '" + ''.join(email) + "';")
-                cursor.execute("INSERT INTO hiday.TRANSAKSI_UPGRADE_LUMBUNG VALUES('"+str(email)+"', '"+dt+"');")
+                
+                cursor.execute("SELECT * FROM hiday.PENGGUNA WHERE email = '" + ''.join(email) + "'")
+                resultt = cursor.fetchone()
+                contextt = {
+                    'koin' : resultt[4]
+                }
+
+                koinPengguna = int(contextt['koin'])
+
+                if(koinPengguna >= 200) :
+                    print('bisa')
+                    cursor.execute("UPDATE hiday.LUMBUNG SET level="+ str(level_lumbung) +", kapasitas_maksimal ="+ str(kapasitas_lumbung)+" WHERE email = '" + ''.join(email) + "';")
+                    cursor.execute("INSERT INTO hiday.TRANSAKSI_UPGRADE_LUMBUNG VALUES('"+str(email)+"', '"+dt+"');")
+                
+                elif (koinPengguna < 200):
+                    print("gk cukup")
+                    return HttpResponseNotFound("Koin anda tidak cukup, silahkan cari Koin terlebih dahulu")
+
             
             except Exception as e:
                 print('gak bisa')
