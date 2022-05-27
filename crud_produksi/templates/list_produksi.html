@@ -35,7 +35,11 @@
             <th>{{ res.namaaset }}</th>
             <th>{{ res.durasi }}</th>
             <th>{{ res.jumlah_unit_hasil }}</th>
-            <th><a href="detail-produksi/{{ res.id }}">Detail</a> <br> <a href="{% url 'crud_produksi:ubah-produksi' %}">Update</a> <br> <a href="#">Delete</a> </th>
+            <th><a href="detail-produksi/{{ res.id }}">Detail</a> <br> <a href="ubah-produksi/{{ res.id }}">Update</a> <br>
+            {% if res.canDelete == 'True' %}
+            <a href="delete-produksi/{{ res.id }}">Delete</a>
+            {% endif %}
+            </th>
         </tr>
         {% endfor %}
     </table>

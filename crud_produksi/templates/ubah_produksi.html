@@ -17,53 +17,52 @@
     {% if role == 'admin' %}
     {% include 'navbar.html' %}
 
-    <form action = "" method = "POST" name="form" onsubmit = "return validateForm()"> 
+    <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="">Nama Produk Makanan</label>
+            <label for="id_IdProduk">Nama Produk Makanan</label>
             </br>
-            <input type="text" class="form-control" placeholder="Nama Produk yang Dipilih" name="Nama" disabled>
+            <select id="id_ID" name="IdProduk">
+                <option value="{{ res.idproduk }}" selected readonly>{{ res.nama }}</option>
+            </select>
+            </br>
+
             </br>
             <label for="">Alat Produksi</label>
             </br>
-            <input type="text" class="form-control" placeholder="Alat Produksi yang Dipilih" name="AlatProduksi">
+            <select id="id_IDA" name="IdAlat">
+                <option value="{{ res.idalat }}" selected readonly>{{ res.namaaset }}</option>
+            </select>
             </br>
+
             <label for="">Durasi Produksi (dalam menit)</label>
             </br>
-            <input type="number" class="form-control" placeholder="Harap diisi" name="DurasiProduksi">
+            <input type="number" class="form-control" placeholder="Harap diisi" name="Durasi" value="{{ res.durasi }}">
             </br>
             <label for="">Jumlah Produk yang Dihasilkan</label>
             </br>
-            <input type="number" class="form-control" placeholder="Harap diisi" name="JumlahProduk">
+            <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" value="{{ res.jumlah_unit_hasil }}">
             </br>
 
-            <table>
-                <tr>
-                <th>Bahan</th>
-                <th>Jumlah</th>
-                </tr>
-        
-                <tr>
-                    <th>Gula Pasir</th>
-                    <th>1</th>
-                </tr>
-
-                <tr>
-                    <th>Tepung</th>
-                    <th>1</th>
-                </tr>
-
-                <tr>
-                    <th>Telur</th>
-                    <th>3</th>
-                </tr>
-            </table>
-
+            <a>Daftar Bahan Yang Dibutuhkan</a>
             <br>
+
+            {% for no, ress in result2 %}
+            <label for="">Bahan</label>
+            <select id="" name="ID">
+                <option value="{{ ress.bahan }}" selected="true" disabled>{{ ress.bahan }}</option>
+            </select>
+
+            <label for="">Jumlah</label>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" value="{{ ress.jumlah }}" disabled>
+            </br>
+            {% endfor %}
+
             <div align='center'>
                 <button type='submit'>Simpan</button>      
             </div>
-        </div>
+        </div> 
+
     </form>
 
     {% endif %}
