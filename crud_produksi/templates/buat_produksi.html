@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/buat_produksi.css' %}">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <title>TK3-F04</title>
 </head>
@@ -18,30 +19,35 @@
     {% if role == 'admin' %}
     {% include 'navbar.html' %}
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Buat">
-    </form> -->
-
     <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
-            <label for="">Nama Produk Makanan</label>
+            <label for="id_IdProduk">Nama Produk Makanan</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Nama">
+            <select id="id_ID" name="IdProduk">
+                {% for pro in DataProduk %}
+                <option value="{{ pro.id_produk }}">{{ pro.nama }}</option>
+                {% endfor %}
+            </select>
+            </br>
+
             </br>
             <label for="">Alat Produksi</label>
             </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="AlatProduksi">
+            <select id="id_IDA" name="IdAlat">
+                {% for aset in DataAset %}
+                <option value="{{ aset.id }}">{{ aset.nama }}</option>
+                {% endfor %}
+            </select>
             </br>
+
             <label for="">Durasi Produksi (dalam menit)</label>
             </br>
-            <input type="number" class="form-control" placeholder="Harap diisi" name="DurasiProduksi">
+            <input type="number" class="form-control" placeholder="Harap diisi" name="Durasi">
             </br>
             <label for="">Jumlah Produk yang Dihasilkan</label>
             </br>
-            <input type="number" class="form-control" placeholder="Harap diisi" name="JumlahProduk">
+            <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah">
             </br>
 
             <a>Daftar Bahan Yang Dibutuhkan</a>
@@ -49,22 +55,24 @@
 
             <label for="">Bahan</label>
             <select id="" name="ID">
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
+                {% for bahan in DataBahan %}
+                <option value="{{ bahan.id }}">{{ bahan.nama }}</option>
+                {% endfor %}
             </select>
 
             <label for="">Jumlah</label>
             <input type="number" class="form-control" placeholder="Harap diisi" name="J1">
             </br>
+              
+            <div id="newRow"></div>
 
             <div align='center'>
-                <button type=''>Tambah Bahan</button>  
+                <button id='addRow'>Tambah Bahan</button>  
                 <br>
                 <button type='submit'>Buat</button>      
             </div>
         </div> 
-        <!-- tambah bahan blm -->
+
     </form>
 
     {% endif %}
@@ -79,20 +87,46 @@
 
 <script>
     function validateForm() {
-        var x = document.forms["form"]['Nama'].value;
-        var y = document.forms["form"]['AlatProduksi'].value;
-        var z = document.forms["form"]['DurasiProduksi'].value;
-        var xx = document.forms["form"]['JumlahProduk'].value;
+        var x = document.forms["form"]['IdProduk'].value;
+        var y = document.forms["form"]['IdAlat'].value;
+        var z = document.forms["form"]['Durasi'].value;
+        var xx = document.forms["form"]['Jumlah'].value;
         var yy = document.forms["form"]['J1'].value;
 
         if (x == "" || y == "" || z == "" || xx == "" || yy == "") {
+        // if (x == "" || y == "" || z == "" || xx == "") {
             alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
             return false;
         }
-    } 
+    }
+</script>
+
+<script type="text/javascript">
+    $("#addRow").click(function(e) {
+        e.preventDefault();
+        var html = '';
+        html += '<div id="row">';
+        html += '</br>';
+        html += '<label for="">Bahan </label>';
+        html += '<select id="" name="">';
+        html += '{% for bahan in DataBahan %}';
+        html += '<option value="{{ bahan.id }}">{{ bahan.nama }}</option>';
+        html += '{% endfor %}';
+        html += '</select>';
+        html += '<label for=""> Jumlah </label>';
+        html += '<input type="number" class="form-control" placeholder="Harap diisi" name="">';
+        html += '<button id="removeRow">X</button>';
+        html += '</br>';
+        html += '</div>';
+
+        $('#newRow').append(html);
+    });
+
+    $(document).on('click', '#removeRow', function (e) {
+        e.preventDefault();
+        $(this).closest('#row').remove();
+    });
+
 </script>
 
 </html>
-
-
-

@@ -21,7 +21,6 @@ def listProduk(request):
             if (request.session['role'] == ['admin']):
                 role = "admin"
 
-                # print(result)   
                 cursor.execute("SELECT id_produk FROM hiday.DETAIL_PESANAN")
                 resultt = tupleFetch(cursor)
 
@@ -35,21 +34,15 @@ def listProduk(request):
                 resultt.append(tupleFetch(cursor))
 
                 # print(resultt)
-
                 # dataAdmin = namedtuple('ResultAdmin',result)
 
                 idGabisaDelete = []
                 for i in range(len(resultt)):
-                    # print(resultt[i][0])
                     idGabisaDelete.append(resultt[i][0])
-                    # temp[i+1] = result[i]
-                
+
                 # print(idGabisaDelete)
 
-                # resultAdmin = []
-
                 cursor.execute("SELECT id, nama, harga_jual, sifat_produk, CASE WHEN id LIKE '%HP%' THEN 'Hasil Panen' WHEN id LIKE '%PH%' THEN 'Produk Hewan' WHEN id LIKE '%PM%' THEN 'Produk Makanan' END AS jenisproduk FROM hiday.PRODUK")
-                # result = tupleFetch(cursor)
                 desc = cursor.description
                 nt_result = []
                 for col in desc:
@@ -109,6 +102,7 @@ def buatProduk(request):
                     nama = form.data.get("Nama")
                     hargajual = form.data.get("HargaJual")
                     sifat = form.data.get("SifatProduk")
+                    checker = idproduk
 
                     # print(idproduk)
                     # print(nama)
@@ -116,10 +110,10 @@ def buatProduk(request):
                     # print(sifat)
                     
                     cursor.execute("SET SEARCH_PATH TO HIDAY")
-                    if (idproduk == "HP"):
+                    if (checker == "HP"):
                         cursor.execute("SELECT id FROM PRODUK WHERE id LIKE'HP%' ORDER BY id DESC LIMIT 1")
                     
-                    elif (idproduk == "PH"):
+                    elif (checker == "PH"):
                         cursor.execute("SELECT id FROM PRODUK WHERE id LIKE'PH%' ORDER BY id DESC LIMIT 1")
 
                     else:
@@ -137,6 +131,16 @@ def buatProduk(request):
 
                     cursor.execute("SET SEARCH_PATH TO HIDAY")
                     cursor.execute("INSERT INTO PRODUK VALUES ('" + idproduk + "', '" + nama + "', '" + hargajual + "', '" + sifat + "')")
+
+                    if (checker == "HP"):
+                        cursor.execute("INSERT INTO HASIL_PANEN VALUES ('" + idproduk + "')")
+
+                    elif (checker == "PH"):
+                        cursor.execute("INSERT INTO PRODUK_HEWAN VALUES ('" + idproduk + "')")
+
+                    else:
+                        cursor.execute("INSERT INTO PRODUK_MAKANAN VALUES ('" + idproduk + "')")
+
                     cursor.execute("SET SEARCH_PATH TO public")
                     cursor.close()
                     return HttpResponseRedirect('/crud-produk/list-produk')

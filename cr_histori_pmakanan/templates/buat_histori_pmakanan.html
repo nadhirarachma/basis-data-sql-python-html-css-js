@@ -26,8 +26,12 @@
     {% if role == 'pengguna' %}
     {% include 'navbar.html' %}
 
-    {% if gagal == 'gagal' %}
+    {% if gagal == 'gapunyabahan' %}
         <body onload = "return alertt()">
+    {% endif %}
+
+    {% if gagal == 'gapunyaaset' %}
+        <body onload = "return alerttdua()">
     {% endif %}
 
     <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
@@ -77,6 +81,10 @@
 
     function alertt() {
         alert('Anda tidak memiliki bahan yang cukup, silahkan menambahkan produk yang akan digunakan sebagai bahan terlebih dahulu');
+    }
+
+    function alerttdua() {
+        alert('Anda tidak memiliki aset (alat) yang dibutuhkan');
     }
 </script>
 
