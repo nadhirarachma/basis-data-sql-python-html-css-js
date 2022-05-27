@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http.response import HttpResponseNotFound, HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.db import connection
 from collections import namedtuple
 from .forms import *
@@ -33,7 +33,6 @@ def listDekorasi(request):
         result = []
         result2 = []
         try:
-            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM hiday.ASET JOIN hiday.DEKORASI ON ID_Aset= ID")
                 result = tupleFetch(cursor)
@@ -70,7 +69,6 @@ def listBibitTanaman(request):
         result2 = []
         result3 = []
         try:
-            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM hiday.ASET JOIN hiday.BIBIT_TANAMAN ON ID_Aset= ID")
                 result = tupleFetch(cursor)
@@ -109,7 +107,6 @@ def listKandang(request):
         result = []
         result2 = []
         try:
-            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM hiday.ASET JOIN hiday.KANDANG ON ID_Aset=ID")
                 result = tupleFetch(cursor)
@@ -146,7 +143,6 @@ def listHewan(request):
         result2 = []
         result3 = []
         try:
-            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT H.ID_Aset, nama, minimum_level, harga_beli, durasi_produksi, id_kandang FROM hiday.ASET A JOIN hiday.HEWAN H ON H.ID_Aset=A.ID JOIN hiday.KANDANG K ON H.ID_Kandang=K.ID_Aset")
                 result = tupleFetch(cursor)
@@ -156,7 +152,7 @@ def listHewan(request):
 
                 cursor.execute("SELECT ID_ASET FROM hiday.HEWAN EXCEPT (SELECT ID_Hewan FROM hiday.HEWAN_MENGHASILKAN_PRODUK_HEWAN NATURAL JOIN hiday.HISTORI_HEWAN)")
                 result3 = tupleFetch(cursor)
-
+                
                 role = "admin"
 
             else:
@@ -186,7 +182,6 @@ def listAlatProduksi(request):
         result2 = []
         result3 = []
         try:
-            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM hiday.ASET JOIN hiday.ALAT_PRODUKSI ON ID_Aset=ID")
                 result = tupleFetch(cursor)
@@ -225,7 +220,6 @@ def listPetakSawah(request):
         result = []
         result2 = []
         try:
-            # cursor.execute("SET SEARCH_PATH TO HIDAY")
             if (request.session['role'] == ['admin']):
                 cursor.execute("SELECT * FROM hiday.ASET JOIN hiday.PETAK_SAWAH ON ID_Aset=ID")
                 result = tupleFetch(cursor)
@@ -859,6 +853,26 @@ def hapusAset(request, key):
         try:
             if (request.session['role'] == ['admin']):
                 cursor.execute("DELETE FROM HIDAY.ASET WHERE id = %s", [key])
+                return redirect("/crud-aset/list-aset")
+
+        except Exception as e:
+            print(e)
+        
+        finally:
+            cursor.close()
+
+    else:
+        return HttpResponseRedirect('/login')
+
+def hapusKandang(request, key):
+    if request.session.has_key('email'):
+        cursor = connection.cursor()
+        try:
+            if (request.session['role'] == ['admin']):
+                cursor.execute("SELECT ID_Aset FROM HIDAY.HEWAN WHERE ID_Kandang = %s", [key])
+                hewan = cursor.fetchall()[0][0]
+                cursor.execute("DELETE FROM HIDAY.ASET WHERE id = %s", [key])
+                cursor.execute("DELETE FROM HIDAY.ASET WHERE id = %s", [hewan])
                 return redirect("/crud-aset/list-aset")
 
         except Exception as e:

@@ -16,27 +16,9 @@
 
     {% include 'navbar.html' %}
 
-    <form action = "" method = "POST">
+    <form name="form" action = "" method = "POST" onsubmit="return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
-            <!-- <label for="id_Aset">ID</label>
-            </br>
-            <input type="text" class="form-control" placeholder="DKxxx" name="ID" disabled>
-            </br>
-            <label for="id_Nama">Nama</label> -->
-            <!-- <input type="text" class="form-control" placeholder="Nama Dekorasi" name="Nama" disabled>
-            </br>
-            <label for="id_MinimumLevel">Minimum Level</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Minimum Level" required>
-            </br>
-            <label for="id_HargaBeli">Harga Beli</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Harga Beli" required>
-            </br>
-            <label for="id_HargaJual">Harga Jual</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Harga Jual" required> -->
             </br>
             <div class="form-group">
                 <label>ID:</label>
@@ -50,17 +32,17 @@
             </br>
             <div class="form-group">
                 <label>Minimum Level:</label>
-                {{ form.MinimumLevel }}
+                <input type="number" class="form-control" placeholder="Harap diisi" name="MinimumLevel">
             </div>
             </br>
             <div class="form-group">
                 <label>Harga Beli:</label>
-                {{ form.HargaBeli }}
+                <input type="number" class="form-control" placeholder="Harap diisi" name="HargaBeli">
             </div>
             </br>
             <div class="form-group">
                 <label>Harga Jual:</label>
-                {{ form.HargaJual }}
+                <input type="number" class="form-control" placeholder="Harap diisi" name="HargaJual">
             </div>
             </br>
             <div align='center'>
@@ -70,5 +52,19 @@
     </form>
 
 </body>
+
+<script>
+
+    function validateForm() {
+        var ml = document.forms["form"]['MinimumLevel'].value;
+        var hb = document.forms["form"]['HargaBeli'].value;
+        var hj = document.forms["form"]['HargaJual'].value;
+        if (ml == "" || hb == "" || hj == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+
+</script>
 
 </html>

@@ -45,7 +45,7 @@
 
                     {% for res2 in result2 %}
                         {% if res.id == res2.id %}
-                        <form action="{% url 'crud_aset:hapus-aset' key=res.id %}">
+                        <form action="{% url 'crud_aset:hapus-kandang' key=res.id %}">
                             <input type="submit" value="Delete" />
                         </form>  
                         {% endif %}

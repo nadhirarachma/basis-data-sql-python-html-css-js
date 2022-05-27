@@ -16,27 +16,9 @@
 
     {% include 'navbar.html' %}
 
-    <form action = "" method = "POST">
+    <form action = "" method = "POST" name="form" onsubmit="return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
-            <!-- <label for="id_Aset">ID</label>
-            </br>
-            <input type="text" class="form-control" placeholder="PSxxx" name="ID" disabled>
-            </br>
-            <label for="id_Nama">Nama</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Nama" required>
-            </br>
-            <label for="id_MinimumLevel">Minimum Level</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Minimum Level" required>
-            </br>
-            <label for="id_HargaBeli">Harga Beli</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Harga Beli" required>
-            </br>
-            <label for="id_JenisTanaman">Jenis Tanaman</label>
-            </br> -->
             </br>
             <div class="form-group">
                 <label>ID:</label>
@@ -45,17 +27,17 @@
             </br>
             <div class="form-group">
                 <label>Nama:</label>
-                {{ form.Nama }}
+                <input type="text" class="form-control" placeholder="Harap diisi" name="Nama">
             </div>
             </br>
             <div class="form-group">
                 <label>Minimum Level:</label>
-                {{ form.MinimumLevel }}
+                <input type="number" class="form-control" placeholder="Harap diisi" name="MinimumLevel">
             </div>
             </br>
             <div class="form-group">
                 <label>Harga Beli:</label>
-                {{ form.HargaBeli }}
+                <input type="number" class="form-control" placeholder="Harap diisi" name="HargaBeli">
             </div>
             </br>
             <label for="id_JenisTanaman">Jenis Tanaman:</label>
@@ -72,5 +54,19 @@
     </form>
 
 </body>
+
+<script>
+
+    function validateForm() {
+        var nm = document.forms["form"]['Nama'].value;
+        var ml = document.forms["form"]['MinimumLevel'].value;
+        var hb = document.forms["form"]['HargaBeli'].value;
+        if (nm == "" || ml == "" || hb == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+
+</script>
 
 </html>

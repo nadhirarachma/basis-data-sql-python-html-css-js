@@ -26,4 +26,5 @@ urlpatterns = [
     path('ubah-alat-produksi/<str:key>', views.ubahAlatProduksi, name='ubah-alat-produksi'),
     path('ubah-petak-sawah/<str:key>', views.ubahPetakSawah, name='ubah-petak-sawah'),
     path('hapus-aset/<str:key>', views.hapusAset, name='hapus-aset'),
+    path('hapus-kandang/<str:key>', views.hapusKandang, name='hapus-kandang'),
 ]
