@@ -109,18 +109,18 @@ def buatProduk(request):
                     # print(hargajual)
                     # print(sifat)
                     
-                    cursor.execute("SET SEARCH_PATH TO HIDAY")
+                    # cursor.execute("SET SEARCH_PATH TO HIDAY")
                     if (checker == "HP"):
-                        cursor.execute("SELECT id FROM PRODUK WHERE id LIKE'HP%' ORDER BY id DESC LIMIT 1")
+                        cursor.execute("SELECT id FROM hiday.PRODUK WHERE id LIKE'HP%' ORDER BY id DESC LIMIT 1")
                     
                     elif (checker == "PH"):
-                        cursor.execute("SELECT id FROM PRODUK WHERE id LIKE'PH%' ORDER BY id DESC LIMIT 1")
+                        cursor.execute("SELECT id FROM hiday.PRODUK WHERE id LIKE'PH%' ORDER BY id DESC LIMIT 1")
 
                     else:
-                        cursor.execute("SELECT id FROM PRODUK WHERE id LIKE'PM%' ORDER BY id DESC LIMIT 1")
+                        cursor.execute("SELECT id FROM hiday.PRODUK WHERE id LIKE'PM%' ORDER BY id DESC LIMIT 1")
                     
                     result = cursor.fetchone()
-                    cursor.execute("SET SEARCH_PATH TO public")
+                    # cursor.execute("SET SEARCH_PATH TO public")
 
                     # print(result)
                     resultt = result[0]
@@ -129,19 +129,19 @@ def buatProduk(request):
                     idAngka = int(resultt) + 1
                     idproduk = "%s%03d" % (idproduk, idAngka)
 
-                    cursor.execute("SET SEARCH_PATH TO HIDAY")
-                    cursor.execute("INSERT INTO PRODUK VALUES ('" + idproduk + "', '" + nama + "', '" + hargajual + "', '" + sifat + "')")
+                    # cursor.execute("SET SEARCH_PATH TO HIDAY")
+                    cursor.execute("INSERT INTO hiday.PRODUK VALUES ('" + idproduk + "', '" + nama + "', '" + hargajual + "', '" + sifat + "')")
 
                     if (checker == "HP"):
-                        cursor.execute("INSERT INTO HASIL_PANEN VALUES ('" + idproduk + "')")
+                        cursor.execute("INSERT INTO hiday.HASIL_PANEN VALUES ('" + idproduk + "')")
 
                     elif (checker == "PH"):
-                        cursor.execute("INSERT INTO PRODUK_HEWAN VALUES ('" + idproduk + "')")
+                        cursor.execute("INSERT INTO hiday.PRODUK_HEWAN VALUES ('" + idproduk + "')")
 
                     else:
-                        cursor.execute("INSERT INTO PRODUK_MAKANAN VALUES ('" + idproduk + "')")
+                        cursor.execute("INSERT INTO hiday.PRODUK_MAKANAN VALUES ('" + idproduk + "')")
 
-                    cursor.execute("SET SEARCH_PATH TO public")
+                    # cursor.execute("SET SEARCH_PATH TO public")
                     cursor.close()
                     return HttpResponseRedirect('/crud-produk/list-produk')
                 
@@ -164,10 +164,10 @@ def ubahProduk(request, slug):
         cursor = connection.cursor()
         result = []
 
-        cursor.execute("SET SEARCH_PATH TO HIDAY")
-        cursor.execute("SELECT id, nama, harga_jual, sifat_produk, CASE WHEN id LIKE '%HP%' THEN 'Hasil Panen' WHEN id LIKE '%PH%' THEN 'Produk Hewan' WHEN id LIKE '%PM%' THEN 'Produk Makanan' END AS jenisproduk FROM PRODUK WHERE id = '" + ''.join(slug) + "'")
+        # cursor.execute("SET SEARCH_PATH TO HIDAY")
+        cursor.execute("SELECT id, nama, harga_jual, sifat_produk, CASE WHEN id LIKE '%HP%' THEN 'Hasil Panen' WHEN id LIKE '%PH%' THEN 'Produk Hewan' WHEN id LIKE '%PM%' THEN 'Produk Makanan' END AS jenisproduk FROM hiday.PRODUK WHERE id = '" + ''.join(slug) + "'")
         result = cursor.fetchone()
-        cursor.execute("SET SEARCH_PATH TO public")
+        # cursor.execute("SET SEARCH_PATH TO public")
         # print(result)
 
         context = {
@@ -182,9 +182,9 @@ def ubahProduk(request, slug):
             hargajual = form.data.get("HargaJual")
             sifat = form.data.get("SifatProduk")
 
-            cursor.execute("SET SEARCH_PATH TO HIDAY")
-            cursor.execute("UPDATE PRODUK SET harga_jual = '" + hargajual + "', sifat_produk = '" + sifat + "' WHERE id = '" + ''.join(slug) + "'")
-            cursor.execute("SET SEARCH_PATH TO public")
+            # cursor.execute("SET SEARCH_PATH TO HIDAY")
+            cursor.execute("UPDATE hiday.PRODUK SET harga_jual = '" + hargajual + "', sifat_produk = '" + sifat + "' WHERE id = '" + ''.join(slug) + "'")
+            # cursor.execute("SET SEARCH_PATH TO public")
             cursor.close()
 
             return HttpResponseRedirect('/crud-produk/list-produk')
@@ -200,9 +200,9 @@ def deleteProduk(request, slug):
     if (request.session['role'] == ['admin']):
         role = "admin"
         cursor = connection.cursor()
-        cursor.execute("SET SEARCH_PATH TO HIDAY")
-        cursor.execute("DELETE FROM PRODUK WHERE id = '" + ''.join(slug) + "'")
-        cursor.execute("SET SEARCH_PATH TO public")
+        # cursor.execute("SET SEARCH_PATH TO HIDAY")
+        cursor.execute("DELETE FROM hiday.PRODUK WHERE id = '" + ''.join(slug) + "'")
+        # cursor.execute("SET SEARCH_PATH TO public")
         cursor.close()
     else:
         role = "pengguna"
