@@ -21,6 +21,8 @@
     <form action = "" method = "POST">
         {% csrf_token %}
         <div class="container" align='center'>
+            </br>
+            </br>
             <label for="">ID Hewan</label>
             <select id="nama_hewan" name="nama_hewan">
                 {% for res in result %}
@@ -31,7 +33,7 @@
             </br>
             <label for="">Jumlah</label>
             </br>
-            <input type="number" class="form-control" placeholder="Harap diisi" name="jumlah" id="jumlah" value=0 min=0 required max=999>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="jumlah" id="jumlah" value=1 min=1 required max=999>
             </br>
             </br>
             <label for="">XP</label>

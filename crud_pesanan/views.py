@@ -87,11 +87,19 @@ def buat_pesanan(request):
 
             if request.method == 'POST':
                 res_dict = request.POST.dict()
-                cursor.execute("insert into hiday.pesanan values('" + id_new_pesanan + "', 'Baru Dipesan', '" + res_dict["jenis_pesanan"] + "', '" + res_dict["nama_pesanan"] + "', 0)")
-                
+
+                total_jumlah = 0
+
                 res_dict.pop("csrfmiddlewaretoken")
-                res_dict.pop("nama_pesanan")
-                res_dict.pop("jenis_pesanan")
+                nama_pesanan = res_dict.pop("nama_pesanan")
+                jenis_pesanan = res_dict.pop("jenis_pesanan")
+
+                for i in res_dict:
+                    total_jumlah += int(res_dict.get(i))
+                if not total_jumlah >= 1:
+                    return render(request, 'create_pesanan_error.html')
+
+                cursor.execute("insert into hiday.pesanan values('" + id_new_pesanan + "', 'Baru Dipesan', '" + jenis_pesanan + "', '" + nama_pesanan + "', 0)")
 
                 no_urut = 1
                 for i in res_dict:
