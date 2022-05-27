@@ -135,9 +135,10 @@ def buatProduksi(request):
 
                     if ((int(jumlahdipengguna) >= int(jumlahdibutuhkan) * int(jumlah)) and (checkerSatu) and (checkerDua)):
                         # print('Masuk')
+                        cursor.execute("SET SEARCH_PATH TO HIDAY")
                         cursor.execute("INSERT INTO hiday.HISTORI_PRODUKSI VALUES ('" + email + "', '" + waktuAwal + "', '" + waktuSelesai + "', '" + jumlah + "' , '" + xp + "')")
                         cursor.execute("INSERT INTO hiday.HISTORI_PRODUKSI_MAKANAN VALUES ('" + email + "', '" + waktuAwal + "', '" + alatproduksi + "', '" + idproduk + "')")
-                        # cursor.execute("SET SEARCH_PATH TO public")
+                        cursor.execute("SET SEARCH_PATH TO public")
                         cursor.close()
                         return HttpResponseRedirect('/cr-histori-pmakanan/list-histori-pmakanan')
                     
