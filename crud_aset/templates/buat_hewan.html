@@ -20,28 +20,9 @@
     <body onload = "return alertt()">
     {% endif %}
 
-    <form action = "" method = "POST">
+    <form action = "" method = "POST" name="form" onsubmit="return validateForm()">
         {% csrf_token %}
         <div class="container" align='center'>
-            <!-- <label for="id_Aset">ID</label>
-            </br>
-            <input type="text" class="form-control" placeholder="HWxxx" name="ID" disabled>
-            </br>
-            <label for="id_Nama">Nama</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Nama" required>
-            </br>
-            <label for="id_MinimumLevel">Minimum Level</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Minimum Level" required>
-            </br>
-            <label for="id_HargaBeli">Harga Beli</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Harga Beli" required>
-            </br>
-            <label for="id_DurasiProduksi">Durasi Produksi</label>
-            </br>
-            <input type="text" class="form-control" placeholder="Harap diisi" name="Durasi Produksi" required> -->
             </br>
             <div class="form-group">
                 <label>ID:</label>
@@ -50,22 +31,22 @@
             </br>
             <div class="form-group">
                 <label>Nama:</label>
-                {{ form.Nama }}
+                <input type="text" class="form-control" placeholder="Harap diisi" name="Nama">
             </div>
             </br>
             <div class="form-group">
                 <label>Minimum Level:</label>
-                {{ form.MinimumLevel }}
+                <input type="number" class="form-control" placeholder="Harap diisi" name="MinimumLevel">
             </div>
             </br>
             <div class="form-group">
                 <label>Harga Beli:</label>
-                {{ form.HargaBeli }}
+                <input type="number" class="form-control" placeholder="Harap diisi" name="HargaBeli">
             </div>
             </br>
             <div class="form-group">
                 <label>Durasi Produksi:</label>
-                {{ form.DurasiProduksi }}
+                <input type="text" class="form-control" placeholder="Harap diisi" name="DurasiProduksi">
             </div>
             </br>
             <div align='center'>
@@ -81,6 +62,17 @@
         alert("Data untuk kandang hewan tersebut belum ada, silahkan membuat kandang terlebih dahulu");
         return false;
     }
+
+    function validateForm() {
+        var nm = document.forms["form"]['Nama'].value;
+        var ml = document.forms["form"]['MinimumLevel'].value;
+        var hb = document.forms["form"]['HargaBeli'].value;
+        var dp = document.forms["form"]['DurasiProduksi'].value;
+        if (nm == "" || ml == "" || hb == "" || dp == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
 </script>
 
 </html>

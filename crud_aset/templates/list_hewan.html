@@ -45,8 +45,8 @@
 
                     {% for res2 in result2 %}
                         {% for res3 in result3 %}
-                            {% if res.id == res2.id and res.id == res3.id_aset %}
-                            <form action="{% url 'crud_aset:hapus-aset' key=res.id %}">
+                            {% if res.id_aset == res2.id and res.id_aset == res3.id_aset %}
+                            <form action="{% url 'crud_aset:hapus-aset' key=res.id_aset %}">
                                 <input type="submit" value="Delete" />
                             </form>  
                             {% endif %}
