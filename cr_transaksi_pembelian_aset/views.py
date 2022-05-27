@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http.response import HttpResponseNotFound, HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.db import connection
 from collections import namedtuple
 from .forms import *
