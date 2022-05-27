@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/create_histori_hewan' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+  
+  <h1>Form Buat Pesanan</h1>
+
+  {% include 'navbar.html' %}
+
+  <div class="container" align='center'>
+    </br>
+    </br>
+     <h1>Pesanan tidak bisa dibuat!</h1>
+     <h2>Pilihlah minimal satu produk untuk dipesan.</h2>
+     </br>
+     </br>
+     <a href="/crud-pesanan/buat-pesanan">OK</a>   
+  </div>
+
+</body>
+
+</html>

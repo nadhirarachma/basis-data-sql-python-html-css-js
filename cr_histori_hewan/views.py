@@ -43,8 +43,6 @@ def produksi_hewan(request):
     if request.session.has_key('email'):
         cursor = connection.cursor()
         result = []
-        result2 = []
-        result3 = []
         try:
             if (request.session['role'] == ['admin']):
                 role = "admin"
@@ -67,7 +65,7 @@ def produksi_hewan(request):
                         id_hewan = i[1]
 
                 if jumlah <= 0 or jumlah_hewan < jumlah:
-                    return render(request, 'error.html')
+                    return render(request, 'create_hewan_error.html')
                 else:
                     time_str = str(datetime.now())
                     cursor.execute("insert into hiday.histori_produksi values('" + request.session['email'][0] + "', '" + time_str + "'::timestamp, '" + time_str + "'::timestamp, " + str(jumlah) + ", " + str(xp) + ")")
